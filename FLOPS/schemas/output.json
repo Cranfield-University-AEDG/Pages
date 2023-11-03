@@ -3491,7 +3491,7 @@
         {
           "type": "object",
           "description": "ABORTED TAKEOFF - ALL ENGINES OPERATING",
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "POINTS": {
               "type": "array",
@@ -3533,7 +3533,7 @@
     "TakeoffData": {
       "type": "object",
       "description": "TakeoffData",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "properties": {
         "TIME": {
           "type": "array",
@@ -3649,7 +3649,7 @@
         {
           "type": "object",
           "description": "ABORTED TAKEOFF - ALL ENGINES OPERATING",
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "POINTS": {
               "type": "array",
@@ -3716,7 +3716,7 @@
         {
           "type": "object",
           "description": "ABORTED TAKEOFF - ALL ENGINES OPERATING",
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "POINTS": {
               "type": "array",
