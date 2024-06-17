@@ -449,7 +449,7 @@
       "type": "object",
       "description": "Base class for namelists",
       "x-abstract": true,
-      "additionalProperties": true
+      "additionalProperties": false
     },
     "WTINNamelist": {
       "allOf": [
@@ -947,7 +947,7 @@
             },
             "FULFMX": {
               "type": "number",
-              "description": "otal fuel capacity of fuselage (wing \"carry-thru\"\nstructure and/or in fuselage tanks), lb",
+              "description": "Total fuel capacity of fuselage (wing \"carry-thru\"\nstructure and/or in fuselage tanks), lb",
               "format": "double"
             },
             "IFUFU": {
