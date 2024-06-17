@@ -148,6 +148,14 @@
           "$ref": "#/definitions/ObjVarConstrSummary"
         }
       ]
+    },
+    "FailedRunOutput": {
+      "description": "Return a failed run oputput",
+      "oneOf": [
+        {
+          "$ref": "#"
+        }
+      ]
     }
   },
   "definitions": {
@@ -2104,6 +2112,156 @@
             "type": "number",
             "format": "double"
           }
+        },
+        "CLLDM": {
+          "type": "number",
+          "description": "MAXIMUM LIFT COEFFICIENT",
+          "format": "double"
+        },
+        "CDMLD": {
+          "type": "number",
+          "description": "MINIMUM DRAG COEFFICIENT",
+          "format": "double"
+        },
+        "FCDMLD": {
+          "type": "number",
+          "description": "WING FRACTION OF CDMLD  ",
+          "format": "double"
+        },
+        "ALMXLD": {
+          "type": "number",
+          "description": "MAXIMUM ANGLE OF ATTACK [DEG]",
+          "format": "double"
+        },
+        "OBSLD": {
+          "type": "number",
+          "description": "OBSTACLE HEIGHT [FT]",
+          "format": "double"
+        },
+        "APRHGT": {
+          "type": "number",
+          "description": "START APPROACH HEIGHT [FT]",
+          "format": "double"
+        },
+        "APRANG": {
+          "type": "number",
+          "description": "APPROACH FLIGHT PATH ANGLE [DEG]",
+          "format": "double"
+        },
+        "DVAPP": {
+          "type": "number",
+          "description": "DELTA APPROACH VELOCITY [KTS]",
+          "format": "double"
+        },
+        "FLDCL": {
+          "type": "number",
+          "description": "LANDING LIFT FACTOR     ",
+          "format": "double"
+        },
+        "FLDCD": {
+          "type": "number",
+          "description": "LANDING DRAG FACTOR     ",
+          "format": "double"
+        },
+        "TDSINK": {
+          "type": "number",
+          "description": "SINK RATE AT TOUCH DOWN [FT/SEC]",
+          "format": "double"
+        },
+        "VANGLD": {
+          "type": "number",
+          "description": "FLARE RATE [DEG/SEC]",
+          "format": "double"
+        },
+        "NOFLAR": {
+          "type": "integer",
+          "description": "NO FLARE ON LANDING ?   ",
+          "format": "int32"
+        },
+        "TISPOL": {
+          "type": "number",
+          "description": "TIME TO SPOILER ACTUATION [SEC]",
+          "format": "double"
+        },
+        "TICUT": {
+          "type": "number",
+          "description": "TIME TO ENGINE CUTBACK [SEC]",
+          "format": "double"
+        },
+        "TIBRAK": {
+          "type": "number",
+          "description": "TIME TO BRAKE APPLICATION [SEC]",
+          "format": "double"
+        },
+        "ACCLIM": {
+          "type": "number",
+          "description": "DECELERATION LIMIT [FT/SEC2]",
+          "format": "double"
+        },
+        "MAGRUP": {
+          "type": "integer",
+          "description": "MISSED APPROACH GEAR UP ",
+          "format": "int32"
+        },
+        "DELHAP": {
+          "type": "number",
+          "description": "APPROACH ALTITUDE STEP [FT]",
+          "format": "double"
+        },
+        "DELDFL": {
+          "type": "number",
+          "description": "FLARE DISTANCE STEP [FT]",
+          "format": "double"
+        },
+        "DELTRN": {
+          "type": "number",
+          "description": "RUNOUT TIME STEP [SEC]",
+          "format": "double"
+        },
+        "INTHLD": {
+          "type": "integer",
+          "description": "THRUST INPUT OPTION     ",
+          "format": "int32"
+        },
+        "ALPLD": {
+          "type": "array",
+          "description": "ANGLE OF ATTACK",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "CLLD": {
+          "type": "array",
+          "description": "LIFT COEFFICIENT",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "CDLD": {
+          "type": "array",
+          "description": "DRAG COEFFICIENT",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "VELLD": {
+          "type": "array",
+          "description": "VELOCITY, FT/SEC",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "THRLD": {
+          "type": "array",
+          "description": "THRUST, LB",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
         }
       }
     },
@@ -2237,9 +2395,9 @@
           "format": "double"
         },
         "LENGTH": {
-          "type": "integer",
+          "type": "number",
           "description": "LENGTH",
-          "format": "int32"
+          "format": "double"
         },
         "FINENESS": {
           "type": "number",
@@ -2343,6 +2501,7 @@
     },
     "PressureDrag": {
       "type": "object",
+      "description": "PressureDrag",
       "additionalProperties": false,
       "properties": {
         "MACH": {
@@ -2432,6 +2591,14 @@
       "description": "CruiseSummaryData",
       "additionalProperties": false,
       "properties": {
+        "WEIGHT": {
+          "type": "array",
+          "description": "WEIGHT",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
         "ALTITUDE": {
           "type": "array",
           "description": "ALTITUDE",
@@ -2476,8 +2643,8 @@
           "type": "array",
           "description": "MACH_NUMBER",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "VELOCITY": {
@@ -2516,8 +2683,8 @@
           "type": "array",
           "description": "L_D",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "ENGINES_OPERATING": {
@@ -2532,8 +2699,8 @@
           "type": "array",
           "description": "NOX_RATE",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         }
       }
@@ -2795,8 +2962,8 @@
           "type": "array",
           "description": "MACH",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "VEL": {
@@ -2891,8 +3058,8 @@
           "type": "array",
           "description": "L/D",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "THRUST": {
@@ -2907,8 +3074,8 @@
           "type": "array",
           "description": "/TMAX",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         }
       }
@@ -3181,8 +3348,8 @@
           "type": "array",
           "description": "MACH_NO.",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "DELTA_T": {
@@ -3245,16 +3412,16 @@
           "type": "array",
           "description": "LIFT",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "L_D": {
           "type": "array",
           "description": "L/D",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "Q": {
@@ -3269,8 +3436,8 @@
           "type": "array",
           "description": "PCODE",
           "items": {
-            "type": "number",
-            "format": "double"
+            "type": "integer",
+            "format": "int32"
           }
         },
         "ENERGY": {
@@ -3365,8 +3532,8 @@
           "type": "array",
           "description": "NOX",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "ENG_PAR": {
@@ -3491,7 +3658,7 @@
         {
           "type": "object",
           "description": "ABORTED TAKEOFF - ALL ENGINES OPERATING",
-          "additionalProperties": true,
+          "additionalProperties": false,
           "properties": {
             "POINTS": {
               "type": "array",
@@ -3533,7 +3700,7 @@
     "TakeoffData": {
       "type": "object",
       "description": "TakeoffData",
-      "additionalProperties": true,
+      "additionalProperties": false,
       "properties": {
         "TIME": {
           "type": "array",
@@ -3571,8 +3738,8 @@
           "type": "array",
           "description": "MACH",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "CLIMB_ANGLE": {
@@ -3611,8 +3778,8 @@
           "type": "array",
           "description": "LIFT COEFFICIENT",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "DRAG_COEFFICIENT": {
@@ -3627,8 +3794,8 @@
           "type": "array",
           "description": "L/D",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "ACCELERATION": {
@@ -3649,7 +3816,7 @@
         {
           "type": "object",
           "description": "ABORTED TAKEOFF - ALL ENGINES OPERATING",
-          "additionalProperties": true,
+          "additionalProperties": false,
           "properties": {
             "POINTS": {
               "type": "array",
@@ -3716,7 +3883,7 @@
         {
           "type": "object",
           "description": "ABORTED TAKEOFF - ALL ENGINES OPERATING",
-          "additionalProperties": true,
+          "additionalProperties": false,
           "properties": {
             "POINTS": {
               "type": "array",
