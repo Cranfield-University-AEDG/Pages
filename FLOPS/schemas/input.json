@@ -449,7 +449,7 @@
       "type": "object",
       "description": "Base class for namelists",
       "x-abstract": true,
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "WTINNamelist": {
       "allOf": [
