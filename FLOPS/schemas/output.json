@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "FLOPSOutput",
   "type": "object",
+  "description": "Output for FLOPS",
   "additionalProperties": false,
   "required": [
     "TITLE",
@@ -13,768 +14,1088 @@
   ],
   "properties": {
     "$schema": {
-      "type": "string"
+      "type": "string",
+      "description": "Property to add schema property in json"
     },
     "TITLE": {
       "type": "string",
+      "description": "Any alphanumeric title. Maximum length 80",
       "maxLength": 80,
       "minLength": 1
     },
     "OPTION": {
-      "$ref": "#/definitions/OutputOptionNamelist"
+      "description": "Program Control, Execution, Analysis and Plot Option Data",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/OutputOptionNamelist"
+        }
+      ]
     },
     "WTIN": {
-      "$ref": "#/definitions/OutputWtinNamelist"
+      "description": "Geometric, Weight, Balance and Inertia Data (Required)",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/OutputWtinNamelist"
+        }
+      ]
     },
     "CONFIN": {
-      "$ref": "#/definitions/OutputConfinNamelist"
+      "description": "Configuration Geometric Ratios, Objective Function Definition, \nand Design Variables (Required)",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/OutputConfinNamelist"
+        }
+      ]
     },
     "AERIN": {
-      "$ref": "#/definitions/OutputAerinNamelist"
+      "description": "Aerodynamic Input Options and Data for Internal Aerodynamic\nCalculations and Approximate Takeoff and Landing (Required)",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/OutputAerinNamelist"
+        }
+      ]
     },
     "ENGDIN": {
-      "$ref": "#/definitions/OutputEngdinNamelist"
+      "description": "Engine Deck Control, Scaling and Usage Data",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/OutputEngdinNamelist"
+        }
+      ]
     },
     "ALL_POINT_ENGINE_DECK_SUMMARY": {
       "type": "array",
+      "description": "All Point Engine Deck Summary",
       "items": {
         "$ref": "#/definitions/PointEngineDeckSummary"
       }
     },
     "MISSIN": {
-      "$ref": "#/definitions/OutputMissinNamelist"
+      "description": "Performance Controls and Factors and Mission Segment Definition ",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/OutputMissinNamelist"
+        }
+      ]
     },
     "TOLIN": {
-      "$ref": "#/definitions/OutputTolinNamelist"
+      "description": "Detailed Takeoff and Landing Data \n(Used only if ITAKOF, ILAND and/or NOPRO = 1 in Namelist $OPTION)",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/OutputTolinNamelist"
+        }
+      ]
     },
     "AERODYNAMIC_DATA": {
-      "$ref": "#/definitions/OutputAerodynamicData"
+      "description": "AERODYNAMIC DATA",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/OutputAerodynamicData"
+        }
+      ]
     },
     "CRUISE_OPTIMIZATION_RESULTS": {
       "type": "array",
+      "description": "CRUISE OPTIMIZATION RESULTS",
       "items": {
         "$ref": "#/definitions/CruiseOptimizationResult"
       }
     },
     "OUTPUT_FROM_THE_WEIGHTS_MODULE": {
-      "$ref": "#/definitions/OutputWeightData"
+      "description": "OUTPUT FROM THE WEIGHTS MODULE DATA",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/OutputWeightData"
+        }
+      ]
     },
     "MISSION_RUNS": {
       "type": "array",
+      "description": "Mission results for different range values",
       "items": {
         "$ref": "#/definitions/MissionRun"
       }
     },
     "LANDING_PERFORMANCE_RESULTS": {
-      "$ref": "#/definitions/LandingPerformanceResults"
+      "description": "LANDING PERFORMANCE RESULTS",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/LandingPerformanceResults"
+        }
+      ]
     },
     "TAKEOFF_PERFORMANCE_RESULTS": {
-      "$ref": "#/definitions/TakeoffPerformanceResults"
+      "description": "TAKEOFF PERFORMANCE RESULTS",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/TakeoffPerformanceResults"
+        }
+      ]
     },
     "OBJ_VAR_CONSTR_SUMMARY": {
-      "$ref": "#/definitions/ObjVarConstrSummary"
+      "description": "OBJ/VAR/CONSTR SUMMARY",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ObjVarConstrSummary"
+        }
+      ]
     },
     "FailedRunOutput": {
-      "$ref": "#"
+      "description": "Return a failed run oputput",
+      "oneOf": [
+        {
+          "$ref": "#"
+        }
+      ]
     }
   },
   "definitions": {
     "OutputOptionNamelist": {
       "type": "object",
+      "description": "PROGRAM CONTROL, EXECUTION, ANALYSIS AND PLOT OPTION DATA",
       "additionalProperties": false,
       "properties": {
         "IOPT": {
           "type": "integer",
+          "description": "TYPE OF PROBLEM             ",
           "format": "int32"
         },
         "IANAL": {
           "type": "integer",
+          "description": "ANALYSIS OPTION             ",
           "format": "int32"
         },
         "INENG": {
           "type": "integer",
+          "description": "MAIN ENGINE DECK SWITCH     ",
           "format": "int32"
         },
         "ITAKOF": {
           "type": "integer",
+          "description": "DETAILED TAKEOFF SWITCH     ",
           "format": "int32"
         },
         "ILAND": {
           "type": "integer",
+          "description": "DETAILED LANDING SWITCH     ",
           "format": "int32"
         },
         "ICOST": {
           "type": "integer",
+          "description": "COST CALCULATION SWITCH     ",
           "format": "int32"
         },
         "IFITE": {
           "type": "integer",
+          "description": "TRANSPORT/FIGHTER/GEN AV    ",
           "format": "int32"
         },
         "NOPRO": {
           "type": "integer",
+          "description": "TAKEOFF PROFILE FOR NOISE   ",
           "format": "int32"
         },
         "NPFILE": {
           "type": "integer",
+          "description": "TAKEOFF PROFILE SWITCH      ",
           "format": "int32"
         },
         "LPFILE": {
           "type": "integer",
+          "description": "LANDING PROFILE SWITCH      ",
           "format": "int32"
         },
         "NOISE": {
           "type": "integer",
+          "description": "NOISE CALCULATIONS SWITCH   ",
           "format": "int32"
         },
         "MPRINT": {
           "type": "integer",
+          "description": "MASTER PRINT CONTROL        ",
           "format": "int32"
         },
         "IXFL": {
           "type": "integer",
+          "description": "XFLOPS DATA PLOT SWITCH     ",
           "format": "int32"
         },
         "IPOLP": {
           "type": "integer",
+          "description": "AERO POLAR PLOT SWITCH      ",
           "format": "int32"
         },
         "IPLTTH": {
           "type": "integer",
+          "description": "THRUST DATA PLOT SWITCH     ",
           "format": "int32"
         },
         "IPLTHS": {
           "type": "integer",
+          "description": "HISTORY DATA PLOT SWITCH    ",
           "format": "int32"
         },
         "IPLTPS": {
           "type": "integer",
+          "description": "EXCESS POWER PLOT SWITCH    ",
           "format": "int32"
         }
       }
     },
     "OutputWtinNamelist": {
       "type": "object",
+      "description": "GEOMETRIC, WEIGHT, BALANCE AND INERTIA DATA",
       "additionalProperties": false,
       "properties": {
         "VMMO": {
           "type": "number",
+          "description": "MAX OPER MACH NUMBER      ",
           "format": "double"
         },
         "ULF": {
           "type": "number",
+          "description": "ULTIMATE LOAD FACTOR",
           "format": "double"
         },
         "NWREF": {
           "type": "number",
+          "description": "REF WEIGHT NUMBER",
           "format": "double"
         },
         "CGREFL": {
           "type": "number",
+          "description": "CG REFERENCE LENGTH",
           "format": "double"
         },
         "CGREFX": {
           "type": "number",
+          "description": "X FOR START OF CGREFL     ",
           "format": "double"
         },
         "MYWTS": {
           "type": "integer",
+          "description": "SWITCH TO COMPUTE WEIGHTS",
           "format": "int32"
         },
         "DGW": {
           "type": "number",
+          "description": "DESIGN GROSS WT. (RATIO)",
           "format": "double"
         },
         "HYDPR": {
           "type": "number",
+          "description": "HYDRAULIC SYSTEM PRESSURE",
           "format": "double"
         },
         "DIH": {
           "type": "number",
+          "description": "DIHEDRAL(POSITIVE)        ",
           "format": "double"
         },
         "GLOV": {
           "type": "number",
+          "description": "GLOVE AND BAT AREA",
           "format": "double"
         },
         "SPAN": {
           "type": "number",
+          "description": "SPAN                      ",
           "format": "double"
         },
         "FLAPR": {
           "type": "number",
+          "description": "CONTROL SURFACE AREA RATIO",
           "format": "double"
         },
         "FCOMP": {
           "type": "number",
+          "description": "FRACTION OF COMPOSITES",
           "format": "double"
         },
         "FAERT": {
           "type": "number",
+          "description": "AEROELASTIC TAILORING FACT",
           "format": "double"
         },
         "FSTRT": {
           "type": "number",
+          "description": "STRUT BRACING FACTOR",
           "format": "double"
         },
         "VARSWP": {
           "type": "number",
+          "description": "VARIABLE SWEEP FACTOR",
           "format": "double"
         },
         "SHT": {
           "type": "number",
+          "description": "AREA                      ",
           "format": "double"
         },
         "SWPHT": {
           "type": "number",
+          "description": "1/4 CHORD SWEEP ANGLE",
           "format": "double"
         },
         "ARHT": {
           "type": "number",
+          "description": "ASPECT RATIO",
           "format": "double"
         },
         "TRHT": {
           "type": "number",
+          "description": "TAPER RATIO               ",
           "format": "double"
         },
         "TCHT": {
           "type": "number",
+          "description": "T/C",
           "format": "double"
         },
         "HHT": {
           "type": "number",
+          "description": "LOCATION ON VERTICAL TAIL ",
           "format": "double"
         },
         "NVERT": {
           "type": "integer",
+          "description": "NUMBER OF VERTICAL TAILS",
           "format": "int32"
         },
         "SVT": {
           "type": "number",
+          "description": "AREA",
           "format": "double"
         },
         "SWPVT": {
           "type": "number",
+          "description": "1/4 CHORD SWEEP ANGLE",
           "format": "double"
         },
         "ARVT": {
           "type": "number",
+          "description": "ASPECT RATIO",
           "format": "double"
         },
         "TRVT": {
           "type": "number",
+          "description": "TAPER RATIO               ",
           "format": "double"
         },
         "TCVT": {
           "type": "number",
+          "description": "T/C",
           "format": "double"
         },
         "NFUSE": {
           "type": "integer",
+          "description": "NUMBER OF FUSELAGES",
           "format": "int32"
         },
         "XL": {
           "type": "number",
+          "description": "TOTAL LENGTH              ",
           "format": "double"
         },
         "WF": {
           "type": "number",
+          "description": "MAXIMUM WIDTH",
           "format": "double"
         },
         "DF": {
           "type": "number",
+          "description": "MAXIMUM DEPTH",
           "format": "double"
         },
         "CARGF": {
           "type": "number",
+          "description": "CARGO AIRCRAFT FACTOR     ",
           "format": "double"
         },
         "XLP": {
           "type": "number",
+          "description": "PASSENGER COMPART LENGTH",
           "format": "double"
         },
         "XMLG": {
           "type": "number",
+          "description": "LENGTH OF MAIN GEAR       ",
           "format": "double"
         },
         "XNLG": {
           "type": "number",
+          "description": "LENGTH OF NOSE GEAR",
           "format": "double"
         },
         "WLDG": {
           "type": "number",
+          "description": "DESIGN LANDING WEIGHT     ",
           "format": "double"
         },
         "MLDWT": {
           "type": "integer",
+          "description": "SET WLDG TO END OF DESCENT",
           "format": "int32"
         },
         "DLDWT": {
           "type": "number",
+          "description": "DELTA WEIGHT FOR MLDWT = 1",
           "format": "double"
         },
         "CARBAS": {
           "type": "number",
+          "description": "CARRIER BASED AIRCRAFT    ",
           "format": "double"
         },
         "NEW": {
           "type": "integer",
+          "description": "NUMBER OF ENGINES ON WING ",
           "format": "int32"
         },
         "NEF": {
           "type": "integer",
+          "description": "NUMBER OF ENGINES ON FUSE",
           "format": "int32"
         },
         "THRSO": {
           "type": "number",
+          "description": "BASELINE ENGINE THRUST",
           "format": "double"
         },
         "WENG": {
           "type": "number",
+          "description": "BASELINE ENGINE WEIGHT    ",
           "format": "double"
         },
         "EEXP": {
           "type": "number",
+          "description": "WEIGHT SCALING PARAMETER  ",
           "format": "double"
         },
         "WINL": {
           "type": "number",
+          "description": "BASELINE INLET WEIGHT",
           "format": "double"
         },
         "EINL": {
           "type": "number",
+          "description": "INLET WT SCALING EXPONENT",
           "format": "double"
         },
         "WNOZ": {
           "type": "number",
+          "description": "BASELINE NOZZLE WEIGHT",
           "format": "double"
         },
         "ENOZ": {
           "type": "number",
+          "description": "NOZZLE WT SCALING EXPONENT",
           "format": "double"
         },
         "XNAC": {
           "type": "number",
+          "description": "BASELINE NACELLE LENGTH",
           "format": "double"
         },
         "DNAC": {
           "type": "number",
+          "description": "BASELINE NACELLE DIAMETER ",
           "format": "double"
         },
         "WPMISC": {
           "type": "number",
+          "description": "ADDED MISC PROP SYSTEM WT ",
           "format": "double"
         },
         "FULDEN": {
           "type": "number",
+          "description": "FUEL DENSITY RATIO",
           "format": "double"
         },
         "FWMAX": {
           "type": "number",
+          "description": "(FUEL CAPACITY FACTOR   ",
           "format": "double"
         },
         "FULWMX": {
           "type": "number",
+          "description": "FUEL CAPACITY OF WING    ",
           "format": "double"
         },
         "FULFMX": {
           "type": "number",
+          "description": "FUEL CAPACITY OF FUSELAGE",
           "format": "double"
         },
         "FULAUX": {
           "type": "number",
+          "description": "AUXIL TANK FUEL CAPACITY",
           "format": "double"
         },
         "FMXTOT": {
           "type": "number",
+          "description": "TOTAL FUEL CAPACITY       ",
           "format": "double"
         },
         "IFUFU": {
           "type": "integer",
+          "description": "ADJUST FUSE FUEL CAPACITY",
           "format": "int32"
         },
         "NTANK": {
           "type": "integer",
+          "description": "NUMBER OF FUEL TANKS      ",
           "format": "int32"
         },
         "NPF": {
           "type": "integer",
+          "description": "FIRST CLASS PASSENGERS",
           "format": "int32"
         },
         "NPB": {
           "type": "integer",
+          "description": "BUSINESS PASSENGERS       ",
           "format": "int32"
         },
         "NPT": {
           "type": "integer",
+          "description": "TOURIST PASSENGERS        ",
           "format": "int32"
         },
         "NSTU": {
           "type": "integer",
+          "description": "STEWARDESSES",
           "format": "int32"
         },
         "NGALC": {
           "type": "integer",
+          "description": "GALLEY CREW               ",
           "format": "int32"
         },
         "NFLCR": {
           "type": "integer",
+          "description": "FLIGHT CREW               ",
           "format": "int32"
         },
         "WPPASS": {
           "type": "number",
+          "description": "WEIGHT PER PASSENGER",
           "format": "double"
         },
         "BPP": {
           "type": "number",
+          "description": "BAGGAGE PER PASSENGER     ",
           "format": "double"
         },
         "CARGOW": {
           "type": "number",
+          "description": "CARGO IN WING             ",
           "format": "double"
         },
         "CARGOF": {
           "type": "number",
+          "description": "CARGO IN FUSELAGE         ",
           "format": "double"
         },
         "PAYLMX": {
           "type": "number",
+          "description": "MAXIMUM PAYLOAD",
           "format": "double"
         },
         "FRWI": {
           "type": "number",
+          "description": "WING - TOTAL",
           "format": "double"
         },
         "FRWI1": {
           "type": "number",
+          "description": "WING WEIGHT FIRST TERM ",
           "format": "double"
         },
         "FRWI2": {
           "type": "number",
+          "description": "WING WEIGHT SECOND TERM ",
           "format": "double"
         },
         "FRWI3": {
           "type": "number",
+          "description": "WING WEIGHT THIRD TERM ",
           "format": "double"
         },
         "FRWI4": {
           "type": "number",
+          "description": "WING WEIGHT FOURTH TERM ",
           "format": "double"
         },
         "FRHT": {
           "type": "number",
+          "description": "HORIZONTAL TAIL           ",
           "format": "double"
         },
         "FRVT": {
           "type": "number",
+          "description": "VERTICAL TAIL             ",
           "format": "double"
         },
         "FRFIN": {
           "type": "number",
+          "description": "WING VERTICAL FIN",
           "format": "double"
         },
         "FRCAN": {
           "type": "number",
+          "description": "CANARD",
           "format": "double"
         },
         "FRFU": {
           "type": "number",
+          "description": "FUSELAGE",
           "format": "double"
         },
         "FRLGN": {
           "type": "number",
+          "description": "NOSE LANDING GEAR",
           "format": "double"
         },
         "FRLGM": {
           "type": "number",
+          "description": "MAIN LANDING GEAR",
           "format": "double"
         },
         "FRNA": {
           "type": "number",
+          "description": "NACELLES - TOTAL OR\nAIR INDUCTION SYSTEM",
           "format": "double"
         },
         "WTHR": {
           "type": "number",
+          "description": "THRUST REVERSERS - TOTAL",
           "format": "double"
         },
         "WPMSC": {
           "type": "number",
+          "description": "MISC PROPULSION SYSTEMS",
           "format": "double"
         },
         "WFSYS": {
           "type": "number",
+          "description": "FUEL SYSTEM               ",
           "format": "double"
         },
         "FRSC": {
           "type": "number",
+          "description": "SURFACE CONTROLS          ",
           "format": "double"
         },
         "WAPU": {
           "type": "number",
+          "description": "AUXILIARY POWER UNIT",
           "format": "double"
         },
         "WIN": {
           "type": "number",
+          "description": "INSTRUMENT GROUP          ",
           "format": "double"
         },
         "WHYD": {
           "type": "number",
+          "description": "HYDRAULICS GROUP          ",
           "format": "double"
         },
         "WELEC": {
           "type": "number",
+          "description": "ELECTRICAL GROUP          ",
           "format": "double"
         },
         "WAVONC": {
           "type": "number",
+          "description": "AVIONICS GROUP            ",
           "format": "double"
         },
         "WARM": {
           "type": "number",
+          "description": "ARMAMENT GROUP            ",
           "format": "double"
         },
         "WFURN": {
           "type": "number",
+          "description": "FURNISHINGS GROUP         ",
           "format": "double"
         },
         "WAC": {
           "type": "number",
+          "description": "AIR CONDITIONING GROUP",
           "format": "double"
         },
         "WAI": {
           "type": "number",
+          "description": "ANTI-ICING GROUP  OR\nAUXILIARY GEAR",
           "format": "double"
         },
         "WUF": {
           "type": "number",
+          "description": "UNUSABLE FUEL             ",
           "format": "double"
         },
         "WOIL": {
           "type": "number",
+          "description": "ENGINE OIL                ",
           "format": "double"
         },
         "WSRV": {
           "type": "number",
+          "description": "PASSENGER SERVICE OR AMMO \nAND NONFIXED WEAPONS",
           "format": "double"
         },
         "WCON": {
           "type": "number",
+          "description": "CARGO AND BAGGAGE CONTAIN. \nOR MISCELL.USEFUL LOAD",
           "format": "double"
         },
         "WAUXT": {
           "type": "number",
+          "description": "AUXILIARY FUEL TANKS      ",
           "format": "double"
         },
         "WFLCRB": {
           "type": "number",
+          "description": "FLIGHT CREW AND BAGGAGE   ",
           "format": "double"
         },
         "WSTUAB": {
           "type": "number",
+          "description": "CABIN CREW AND BAGGAGE    ",
           "format": "double"
         },
         "CGW": {
           "type": "number",
+          "description": "WING                      ",
           "format": "double"
         },
         "CGHT": {
           "type": "number",
+          "description": "HORIZONTAL TAIL",
           "format": "double"
         },
         "CGVT": {
           "type": "number",
+          "description": "VERTICAL TAIL",
           "format": "double"
         },
         "CGFIN": {
           "type": "number",
+          "description": "WING VERTICAL FINS        ",
           "format": "double"
         },
         "CGCAN": {
           "type": "number",
+          "description": "CANARD                    ",
           "format": "double"
         },
         "CGF": {
           "type": "number",
+          "description": "FUSELAGE                  ",
           "format": "double"
         },
         "CGLGN": {
           "type": "number",
+          "description": "NOSE LANDING GEAR         ",
           "format": "double"
         },
         "CGLGM": {
           "type": "number",
+          "description": "MAIN LANDING GEAR         ",
           "format": "double"
         },
         "CGEF": {
           "type": "number",
+          "description": "TWO FORWARD ENGINES       ",
           "format": "double"
         },
         "CGEA": {
           "type": "number",
+          "description": "ONE OR TWO AFT ENGINES    ",
           "format": "double"
         },
         "CGAP": {
           "type": "number",
+          "description": "AUXILIARY POWER UNIT      ",
           "format": "double"
         },
         "CGAV": {
           "type": "number",
+          "description": "AVIONICS GROUP",
           "format": "double"
         },
         "CGARM": {
           "type": "number",
+          "description": "ARMAMENT GROUP",
           "format": "double"
         },
         "CGCR": {
           "type": "number",
+          "description": "FLIGHT CREW",
           "format": "double"
         },
         "CGP": {
           "type": "number",
+          "description": "PASSENGERS                ",
           "format": "double"
         },
         "CGCW": {
           "type": "number",
+          "description": "CARGO/EXT STORES IN WING  ",
           "format": "double"
         },
         "CGCF": {
           "type": "number",
+          "description": "CARGO/EXT STORES IN FUSE  ",
           "format": "double"
         },
         "CGZWF": {
           "type": "number",
+          "description": "FUSELAGE FUEL",
           "format": "double"
         },
         "CGFWF": {
           "type": "number",
+          "description": "WING FUEL",
           "format": "double"
         },
         "CGN": {
           "type": "number",
+          "description": "AIR INDUCTION SYSTEM      ",
           "format": "double"
         },
         "CGAC": {
           "type": "number",
+          "description": "AIR CONDITIONING",
           "format": "double"
         },
         "CGAI": {
           "type": "number",
+          "description": "AUXILIARY GEAR",
           "format": "double"
         },
         "CGAUT": {
           "type": "number",
+          "description": "AUXILIARY TANKS",
           "format": "double"
         },
         "CGAMMO": {
           "type": "number",
+          "description": "AMMO AND NONFIXED GUNS",
           "format": "double"
         },
         "CGMIS": {
           "type": "number",
+          "description": "MISCELLANEOUS USEFUL LOAD ",
           "format": "double"
         },
         "CGPOW": {
           "type": "number",
+          "description": "SYSTEM WT FOR ALT ENGINES ",
           "format": "double"
         },
         "CGALTE": {
           "type": "number",
+          "description": "ALTERNATE ENGINES",
           "format": "double"
         },
         "CGBAT": {
           "type": "number",
+          "description": "ALTERNATE ENERGY STORAGE  ",
           "format": "double"
         }
       }
     },
     "OutputConfinNamelist": {
       "type": "object",
+      "description": "GEOMETRIC, WEIGHT, BALANCE AND INERTIA DATA",
       "additionalProperties": false,
       "properties": {
         "DESRNG": {
           "type": "number",
+          "description": "DESIGN RANGE [N MI]",
           "format": "double"
         },
         "WSR": {
           "type": "number",
+          "description": "WING LOADING REQUIRED",
           "format": "double"
         },
         "TWR": {
           "type": "number",
+          "description": "THRUST/WEIGHT REQUIRED",
           "format": "double"
         },
         "PGLOV": {
           "type": "number",
+          "description": "GLOVE/WING AREA REQUIRED",
           "format": "double"
         },
         "HTVC": {
           "type": "number",
+          "description": "HORIZ TAIL VOLUME COEF",
           "format": "double"
         },
         "VTVC": {
           "type": "number",
+          "description": "VERT TAIL VOLUME COEF",
           "format": "double"
         },
         "ICOST": {
           "type": "integer",
+          "description": "COST CALCULATION SWITCH",
           "format": "int32"
         },
         "FUNCTION": {
-          "type": "string"
+          "type": "string",
+          "description": "FUNCTION TO BE OPTIMIZED - OBJ"
         },
         "GW": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "RAMP WEIGHT, LBF",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "AR": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "WING ASPECT RATIO",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "THRUST": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "THRUST PER ENGINE, LBF",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "SW": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "REF WING AREA, SQ FT",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "TR": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "WING TAPER RATIO",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "SWEEP": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "WING 1/4 CHORD SWEEP, DEG",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "TCA": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "WING T/C",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "VCMN": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "CRUISE MACH NUMBER",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "CH": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "MAX CRUISE ALTITUDE, FT",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "ETIT": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "TURBINE INLET TEMP (R)",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "EOPR": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "OVERALL PRESSURE RATIO",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "EFPR": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "FAN PRESSURE RATIO",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "EBPR": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "BYPASS RATIO",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "ETTR": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "THROTTLE RATIO",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "EBLA": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "PROPELLER BLADE ANGLE",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "VARTH": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "TAKEOFF THRUST FACTOR",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "ROTVEL": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "ROTATION VELOCITY",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         },
         "PLR": {
-          "$ref": "#/definitions/DesignVariableData"
+          "description": "THRUST FRACTION AFTER PROGRAMMED LAPSE RATE",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DesignVariableData"
+            }
+          ]
         }
       }
     },
@@ -784,251 +1105,312 @@
       "properties": {
         "VALUE": {
           "type": "number",
+          "description": "VALUE",
           "format": "double"
         },
         "ACTIVITY": {
           "type": "number",
+          "description": "ACTIVITY",
           "format": "double"
         },
         "LOWER_BOUND": {
           "type": "number",
+          "description": "LOWER_BOUND",
           "format": "double"
         },
         "UPPER_BOUND": {
           "type": "number",
+          "description": "UPPER_BOUND",
           "format": "double"
         },
         "SCALE_FACTOR": {
           "type": "number",
+          "description": "SCALE_FACTOR",
           "format": "double"
         }
       }
     },
     "OutputAerinNamelist": {
       "type": "object",
+      "description": "AERODYNAMIC OPTIONS AND APPROXIMATE TAKEOFF AND LANDING DATA",
       "additionalProperties": false,
       "properties": {
         "MYAERO": {
           "type": "integer",
+          "description": "AERODYNAMIC INPUT METHOD",
           "format": "int32"
         },
         "IWAVE": {
           "type": "integer",
+          "description": "# [None]",
           "format": "int32"
         },
         "FWAVE": {
           "type": "number",
+          "description": "WAVE DRAG FACTOR",
           "format": "double"
         },
         "ITPAER": {
           "type": "integer",
+          "description": "LINEAR/PARABOLIC INTERP",
           "format": "int32"
         },
         "IBO": {
           "type": "integer",
+          "description": "AERO MATRIX FORMAT SWITCH",
           "format": "int32"
         },
         "CAM": {
           "type": "number",
+          "description": "MAX CAMBER AT 70 PERCENT SEMISPAN [PERCENT CHORD]",
           "format": "double"
         },
         "SBASE": {
           "type": "number",
+          "description": "AIRCRAFT BASE AREA [SQ FT]",
           "format": "double"
         },
         "AITEK": {
           "type": "number",
+          "description": "WING TECHNOLOGY",
           "format": "double"
         },
         "MODARO": {
           "type": "integer",
+          "description": "MODIFY EDET DATA",
           "format": "int32"
         },
         "FCLDES": {
           "type": "number",
+          "description": "FIXED DESIGN CL",
           "format": "double"
         },
         "FMDES": {
           "type": "number",
+          "description": "FIXED DESIGN MACH NUMBER",
           "format": "double"
         },
         "XLLAM": {
           "type": "number",
+          "description": "TURBULENT/LAMINAR FLOW",
           "format": "double"
         },
         "E": {
           "type": "number",
+          "description": "AERO EFFICIENCY FACTOR",
           "format": "double"
         },
         "SWETW": {
           "type": "number",
+          "description": "WING WETTED AREA",
           "format": "double"
         },
         "SWETH": {
           "type": "number",
+          "description": "HOR. TAIL WETTED AREA",
           "format": "double"
         },
         "SWETV": {
           "type": "number",
+          "description": "VERT. TAIL WETTED AREA",
           "format": "double"
         },
         "SWETF": {
           "type": "number",
+          "description": "FUSELAGE WETTED AREA",
           "format": "double"
         },
         "SWETN": {
           "type": "number",
+          "description": "NACELLE WETTED AREA",
           "format": "double"
         },
         "SWETC": {
           "type": "number",
+          "description": "CANARD WETTED AREA",
           "format": "double"
         },
         "WRATIO": {
           "type": "number",
+          "description": "RATIO OF MAX. LANDING WT. TO MAX. TAKEOFF WT.",
           "format": "double"
         },
         "VAPPR": {
           "type": "number",
+          "description": "MAX. LANDING VELOCITY [KTS]",
           "format": "double"
         },
         "FLTO": {
           "type": "number",
+          "description": "MAX. TAKEOFF FIELD LENGTH [FT]",
           "format": "double"
         },
         "FLLDG": {
           "type": "number",
+          "description": "MAX. LANDING FIELD LENGTH [FT]",
           "format": "double"
         },
         "CLTOM": {
           "type": "number",
+          "description": "MAX. CL TAKEOFF CONFIG.",
           "format": "double"
         },
         "CLLDM": {
           "type": "number",
+          "description": "MAX. CL LANDING CONFIG.",
           "format": "double"
         },
         "CLAPP": {
           "type": "number",
+          "description": "APPROACH CL",
           "format": "double"
         },
         "DRATIO": {
           "type": "number",
+          "description": "AIR DENSITY RATIO",
           "format": "double"
         },
         "ELODSS": {
           "type": "number",
+          "description": "L/D RATIO 2ND SEG. CLIMB",
           "format": "double"
         },
         "ELODMA": {
           "type": "number",
+          "description": "L/D RATIO MISSED APPROACH",
           "format": "double"
         },
         "THROFF": {
           "type": "number",
+          "description": "THRUST PER ENGINE TAKEOFF",
           "format": "double"
         },
         "THRSS": {
           "type": "number",
+          "description": "THRUST PER ENGINE 2ND SEG. CLIMB [LBF]",
           "format": "double"
         },
         "THRMA": {
           "type": "number",
+          "description": "THRUST PER ENGINE MISSED APPROACH [LBF]",
           "format": "double"
         }
       }
     },
     "OutputEngdinNamelist": {
       "type": "object",
+      "description": "ENGINE DECK CONTROL, SCALING AND USAGE DATA",
       "additionalProperties": false,
       "properties": {
         "NGPRT": {
           "type": "integer",
+          "description": "ENGINE DECK PRINT CONTROL",
           "format": "int32"
         },
         "IGENEN": {
           "type": "integer",
+          "description": "ENGINE DECK SOURCE SWITCH",
           "format": "int32"
         },
         "EXTFAC": {
           "type": "number",
+          "description": "SLOPE FACTOR FOR EXTRAPOLATING FUEL FLOWS",
           "format": "double"
         },
         "FFFSUB": {
           "type": "number",
+          "description": "SUBSONIC FUEL FLOW FACTOR",
           "format": "double"
         },
         "FFFSUP": {
           "type": "number",
+          "description": "SUPERSONIC FUEL FLOW FACT",
           "format": "double"
         },
         "IDLE": {
           "type": "integer",
+          "description": "FLIGHT IDLE SWITCH",
           "format": "int32"
         },
         "NONEG": {
           "type": "integer",
+          "description": "IGNORE NEGATIVE THRUSTS",
           "format": "int32"
         },
         "FIDMIN": {
           "type": "number",
+          "description": "MIN IDLE FUEL FLOW FRACT",
           "format": "double"
         },
         "FIDMAX": {
           "type": "number",
+          "description": "MAX IDLE FUEL FLOW FRACT",
           "format": "double"
         },
         "IXTRAP": {
           "type": "integer",
+          "description": "SFC EXTRAPOLATION SWITCH",
           "format": "int32"
         },
         "IFILL": {
           "type": "integer",
+          "description": "PART POWER DATA SWITCH",
           "format": "int32"
         },
         "MAXCR": {
           "type": "integer",
+          "description": "MAX. CRUISE POWER SETTING",
           "format": "int32"
         },
         "BOOST": {
           "type": "number",
+          "description": "BOOST ENGINE SWITCH",
           "format": "double"
         },
         "DFFAC": {
           "type": "number",
+          "description": "FUEL FLOW SCALING CONSTANT TERM",
           "format": "double"
         },
         "FFFAC": {
           "type": "number",
+          "description": "FUEL FLOW SCALING LINEAR TERM",
           "format": "double"
         },
         "NOX": {
           "type": "integer",
+          "description": "NITROGEN OXIDES SWITCH",
           "format": "int32"
         },
         "INSDRG": {
           "type": "integer",
+          "description": "INSTALLATION DRAG SWITCH",
           "format": "int32"
         },
         "EIFILE": {
-          "type": "string"
+          "type": "string",
+          "description": "ENGINE DECK 1 FILE NAME"
         }
       }
     },
     "PointEngineDeckSummary": {
       "type": "object",
+      "description": "POINT ENGINE DECK SUMMARY",
       "additionalProperties": false,
       "properties": {
         "MACH": {
           "type": "number",
+          "description": "MACH",
           "format": "double"
         },
         "ALTITUDE": {
           "type": "number",
+          "description": "ALTITUDE",
           "format": "double"
         },
         "THRUSTS": {
           "type": "array",
+          "description": "THRUSTS",
           "items": {
             "type": "number",
             "format": "double"
@@ -1036,6 +1418,7 @@
         },
         "FUEL_FLOWS": {
           "type": "array",
+          "description": "FUEL FLOWS",
           "items": {
             "type": "number",
             "format": "double"
@@ -1043,6 +1426,7 @@
         },
         "SFCS": {
           "type": "array",
+          "description": "SFCS",
           "items": {
             "type": "number",
             "format": "double"
@@ -1050,6 +1434,7 @@
         },
         "NOX_RATIOS": {
           "type": "array",
+          "description": "NOX_RATIOS_FOLLOW",
           "items": {
             "type": "number",
             "format": "double"
@@ -1059,504 +1444,629 @@
     },
     "OutputMissinNamelist": {
       "type": "object",
+      "description": "PERFORMANCE CONTROLS AND FACTORS AND MISSION SEGMENT DEFINITION",
       "additionalProperties": false,
       "properties": {
         "INDR": {
           "type": "integer",
+          "description": "ENDURANCE MISSION SWITCH",
           "format": "int32"
         },
         "FACT": {
           "type": "number",
+          "description": "OVERALL FUEL FLOW FACTOR",
           "format": "double"
         },
         "FCDO": {
           "type": "number",
+          "description": "CDO FACTOR",
           "format": "double"
         },
         "FCDI": {
           "type": "number",
+          "description": "CDI FACTOR",
           "format": "double"
         },
         "FCDSUB": {
           "type": "number",
+          "description": "SUBSONIC CD FACTOR",
           "format": "double"
         },
         "FCDSUP": {
           "type": "number",
+          "description": "SUPERSONIC CD FACTOR",
           "format": "double"
         },
         "ISKAL": {
           "type": "integer",
+          "description": "ENGINE SCALING SWITCH",
           "format": "int32"
         },
         "OWFACT": {
           "type": "number",
+          "description": "OWE FACTOR",
           "format": "double"
         },
         "IFLAG": {
           "type": "integer",
+          "description": "PRINT FLAG",
           "format": "int32"
         },
         "MSUMPT": {
           "type": "integer",
+          "description": "DETAILED MISSION PRINT",
           "format": "int32"
         },
         "DTC": {
           "type": "number",
+          "description": "TEMPERATURE DEVIATION [DEG C]",
           "format": "double"
         },
         "IRW": {
           "type": "integer",
+          "description": "CALC RAMP WT OR RANGE",
           "format": "int32"
         },
         "RTOL": {
           "type": "number",
+          "description": "RANGE TOLERANCE [N MI]",
           "format": "double"
         },
         "IATA": {
           "type": "integer",
+          "description": "ATA TRAFFIC ALLOWANCE",
           "format": "int32"
         },
         "TLWIND": {
           "type": "number",
+          "description": "TAIL WIND VELOCITY [KTS]",
           "format": "double"
         },
         "DWT": {
           "type": "number",
+          "description": "WEIGHT INCREMENT [LBF]",
           "format": "double"
         },
         "TAKOTM": {
           "type": "number",
+          "description": "TAKEOFF TIME [MIN]",
           "format": "double"
         },
         "TAXOTM": {
           "type": "number",
+          "description": "TAXI-OUT TIME [MIN]",
           "format": "double"
         },
         "APPRTM": {
           "type": "number",
+          "description": "APPROACH TIME [MIN]",
           "format": "double"
         },
         "APPFFF": {
           "type": "number",
+          "description": "APPROACH FUEL FLOW FACTOR",
           "format": "double"
         },
         "TAXITM": {
           "type": "number",
+          "description": "TAXI-IN TIME [MIN]",
           "format": "double"
         },
         "ITTFF": {
           "type": "integer",
+          "description": "TAKEOFF POWER SETTING",
           "format": "int32"
         },
         "CLMMIN": {
           "type": "number",
+          "description": "MINIMUM CLIMB MACH NUMBER",
           "format": "double"
         },
         "CLMMAX": {
           "type": "number",
+          "description": "MAXIMUM CLIMB MACH NUMBER",
           "format": "double"
         },
         "CLAMIN": {
           "type": "number",
+          "description": "MINIMUM CLIMB ALTITUDE, FT",
           "format": "double"
         },
         "CLAMAX": {
           "type": "number",
+          "description": "MAXIMUM CLIMB ALTITUDE, FT",
           "format": "double"
         },
         "NINCL": {
           "type": "integer",
+          "description": "NUMBER OF CLIMB STEPS",
           "format": "int32"
         },
         "FWF": {
           "type": "number",
+          "description": "CLIMB OPTIMIZATION FACTOR",
           "format": "double"
         },
         "NCRCL": {
           "type": "integer",
+          "description": "FOLLOWING CRUISE SEGMENT",
           "format": "int32"
         },
         "CLDCD": {
           "type": "number",
+          "description": "DRAG COEFFICIENT INCREMENT",
           "format": "double"
         },
         "IPPCL": {
           "type": "integer",
+          "description": "NO. OF POWER SETTINGS",
           "format": "int32"
         },
         "ISTCL": {
           "type": "integer",
+          "description": "STORE DRAG DURING CLIMB",
           "format": "int32"
         },
         "MAXCL": {
           "type": "integer",
+          "description": "MAX CLIMB POWER SETTING",
           "format": "int32"
         },
         "IFAACL": {
           "type": "integer",
+          "description": "FAA CLIMB ENFORCED",
           "format": "int32"
         },
         "IFAADE": {
           "type": "integer",
+          "description": "FAA DESCENT ENFORCED",
           "format": "int32"
         },
         "NODIVE": {
           "type": "integer",
+          "description": "MINIMUM CLIMB RATE SWITCH",
           "format": "int32"
         },
         "DIVLIM": {
           "type": "number",
+          "description": "MINIMUM CLIMB RATE [FT/MIN]",
           "format": "double"
         },
         "QLIM": {
           "type": "number",
+          "description": "Q LIMIT IN CLIMB [PSF]",
           "format": "double"
         },
         "RDLIM": {
           "type": "number",
+          "description": "MAXIMUM RATE OF DESCENT [FT/MIN]",
           "format": "double"
         },
         "IOC": {
           "type": "integer",
+          "description": "CRUISE OPTION SWITCH",
           "format": "int32"
         },
         "FFUEL": {
           "type": "number",
+          "description": "CRUISE OPT FUEL FACTOR",
           "format": "double"
         },
         "FNOX": {
           "type": "number",
+          "description": "CRUISE OPT NOX FACTOR",
           "format": "double"
         },
         "CRMACH": {
           "type": "number",
+          "description": "MAXIMUM MACH NUMBER",
           "format": "double"
         },
         "CRALT": {
           "type": "number",
+          "description": "MAXIMUM ALTITUDE, FT",
           "format": "double"
         },
         "CRDCD": {
           "type": "number",
+          "description": "DRAG COEFFICIENT INCREMENT",
           "format": "double"
         },
         "ISTCR": {
           "type": "integer",
+          "description": "STORE DRAG DURING CRUISE",
           "format": "int32"
         },
         "FLRCR": {
           "type": "number",
+          "description": "LONG RANGE CRUISE FACTOR",
           "format": "double"
         },
         "CRMMIN": {
           "type": "number",
+          "description": "MINIMUM MACH NUMBER",
           "format": "double"
         },
         "CRCLMX": {
           "type": "number",
+          "description": "MAXIMUM LIFT COEFFICIENT",
           "format": "double"
         },
         "IFEATH": {
           "type": "integer",
+          "description": "ENGINE FEATHERING ALLOWED",
           "format": "int32"
         },
         "FEATHF": {
           "type": "number",
+          "description": "ENGINE FRACTION REMAINING",
           "format": "double"
         },
         "CDFETH": {
           "type": "number",
+          "description": "CD INCREASE FOR FEATHERING",
           "format": "double"
         },
         "HPMIN": {
           "type": "number",
+          "description": "MIN CRUISE ALTITUDE, FT",
           "format": "double"
         },
         "DCWT": {
           "type": "number",
+          "description": "INCREMENT IN CRUISE WT. [LBF]",
           "format": "double"
         },
         "RCIN": {
           "type": "number",
+          "description": "RATE OF CLIMB CEILING [FT/MIN]",
           "format": "double"
         },
         "IVS": {
           "type": "integer",
+          "description": "DESCENT OPTION SWITCH",
           "format": "int32"
         },
         "DECL": {
           "type": "number",
+          "description": "DESCENT LIFT COEFF.",
           "format": "double"
         },
         "DEMMIN": {
           "type": "number",
+          "description": "MINIMUM DESCENT MACH NO.",
           "format": "double"
         },
         "DEMMAX": {
           "type": "number",
+          "description": "MAXIMUM DESCENT MACH NO.",
           "format": "double"
         },
         "DEAMIN": {
           "type": "number",
+          "description": "MINIMUM DESCENT ALTITUDE [FT]",
           "format": "double"
         },
         "DEAMAX": {
           "type": "number",
+          "description": "MAXIMUM DESCENT ALTITUDE [FT]",
           "format": "double"
         },
         "NINDE": {
           "type": "integer",
+          "description": "NUMBER OF DESCENT STEPS",
           "format": "int32"
         },
         "DEDCD": {
           "type": "number",
+          "description": "DRAG COEFFICIENT INCREMENT",
           "format": "double"
         },
         "ISTDE": {
           "type": "integer",
+          "description": "STORE DRAG DURING DESCENT",
           "format": "int32"
         },
         "IRS": {
           "type": "integer",
+          "description": "RESERVE CALC. OR CONST",
           "format": "int32"
         },
         "RESRFU": {
           "type": "number",
+          "description": "RESERVE FUEL [LBM]",
           "format": "double"
         },
         "RESTRP": {
           "type": "number",
+          "description": "FRACTION OF TRIP FUEL",
           "format": "double"
         },
         "RESRPW": {
           "type": "number",
+          "description": "RESERVE ALTERNATE ENERGY",
           "format": "double"
         },
         "RPWTRP": {
           "type": "number",
+          "description": "FRACTION OF TRIP ENERGY",
           "format": "double"
         },
         "TIMMAP": {
           "type": "number",
+          "description": "MISSED APPROACH TIME [MIN]",
           "format": "double"
         },
         "ALTRAN": {
           "type": "number",
+          "description": "RANGE TO ALTERNATE AIRPORT [N MI]",
           "format": "double"
         },
         "NCLRES": {
           "type": "integer",
+          "description": "RESERVE CLIMB SCHEDULE",
           "format": "int32"
         },
         "NCRRES": {
           "type": "integer",
+          "description": "RESERVE CRUISE SCHEDULE",
           "format": "int32"
         },
         "SREMCH": {
           "type": "number",
+          "description": "START RESERVE MACH NUMBER",
           "format": "double"
         },
         "EREMCH": {
           "type": "number",
+          "description": "END RESERVE MACH NUMBER",
           "format": "double"
         },
         "SREALT": {
           "type": "number",
+          "description": "START RESERVE ALTITUDE [FT]",
           "format": "double"
         },
         "EREALT": {
           "type": "number",
+          "description": "END RESERVE ALTITUDE [FT]",
           "format": "double"
         },
         "HOLDTM": {
           "type": "number",
+          "description": "RESERVE HOLDING TIME [MIN]",
           "format": "double"
         },
         "NCRHOL": {
           "type": "integer",
+          "description": "HOLD CRUISE SCHEDULE",
           "format": "int32"
         },
         "IHOPOS": {
           "type": "integer",
+          "description": "HOLD POSITION SWITCH",
           "format": "int32"
         },
         "ICRON": {
           "type": "integer",
+          "description": "CRUISE ONLY SWITCH",
           "format": "int32"
         },
         "THOLD": {
           "type": "number",
+          "description": "2ND RES HOLD TIME OR FRAC [MIN]",
           "format": "double"
         },
         "NCRTH": {
           "type": "integer",
+          "description": "THOLD CRUISE SCHEDULE",
           "format": "int32"
         }
       }
     },
     "OutputTolinNamelist": {
       "type": "object",
+      "description": "DETAILED TAKEOFF AND LANDING INPUT DATA",
       "additionalProperties": false,
       "properties": {
         "APA": {
           "type": "number",
+          "description": "AIRPORT ALTITUDE [FT]",
           "format": "double"
         },
         "DTCT": {
           "type": "number",
+          "description": "DELTA TEMPERATURE [DEG C]",
           "format": "double"
         },
         "SWREF": {
           "type": "number",
+          "description": "REFERENCE WING AREA [SQ FT]",
           "format": "double"
         },
         "ARRET": {
           "type": "number",
+          "description": "REFERENCE ASPECT RATIO",
           "format": "double"
         },
         "WHGT": {
           "type": "number",
+          "description": "WING HEIGHT ABOVE GROUND [FT]",
           "format": "double"
         },
         "ALPRUN": {
           "type": "number",
+          "description": "ANGLE OF ATTACK ON GROUND [DEG]",
           "format": "double"
         },
         "TINC": {
           "type": "number",
+          "description": "THRUST INCIDENCE ON GRND [DEG]",
           "format": "double"
         },
         "ROLLMU": {
           "type": "number",
+          "description": "COEF. OF ROLLING FRICTION",
           "format": "double"
         },
         "BRAKMU": {
           "type": "number",
+          "description": "COEF. OF FRICTION W/BRAKES",
           "format": "double"
         },
         "CDGEAR": {
           "type": "number",
+          "description": "LANDING GEAR DRAG COEF.",
           "format": "double"
         },
         "CDEOUT": {
           "type": "number",
+          "description": "ENGINE OUT DELTA CD",
           "format": "double"
         },
         "CLSPOL": {
           "type": "number",
+          "description": "SPOILER LIFT COEFFICIENT",
           "format": "double"
         },
         "CDSPOL": {
           "type": "number",
+          "description": "SPOILER DRAG COEFFICIENT",
           "format": "double"
         },
         "INCGEF": {
           "type": "integer",
+          "description": "GROUND EFFECTS SWITCH",
           "format": "int32"
         },
         "ARGEF": {
           "type": "number",
+          "description": "AR FACTOR FOR GRND EFF.",
           "format": "double"
         },
         "ITIME": {
           "type": "integer",
+          "description": "PROFILE PRINT SWITCH",
           "format": "int32"
         },
         "CLTOM": {
           "type": "number",
+          "description": "MAXIMUM LIFT COEFFICIENT",
           "format": "double"
         },
         "CDMTO": {
           "type": "number",
+          "description": "MINIMUM DRAG COEFFICIENT",
           "format": "double"
         },
         "FCDMTO": {
           "type": "number",
+          "description": "WING FRACTION OF CDMTO",
           "format": "double"
         },
         "ALMXTO": {
           "type": "number",
+          "description": "MAXIMUM ANGLE OF ATTACK [DEG]",
           "format": "double"
         },
         "OBSTO": {
           "type": "number",
+          "description": "OBSTACLE HEIGHT [FT]",
           "format": "double"
         },
         "ALPROT": {
           "type": "number",
+          "description": "MAX ALPHA DURING ROTATION [DEG]",
           "format": "double"
         },
         "VROTAT": {
           "type": "number",
+          "description": "ROTATION VELOCITY [KTS OR % VSTALL]",
           "format": "double"
         },
         "VANGL": {
           "type": "number",
+          "description": "ROTATION RATE [DEG/SEC]",
           "format": "double"
         },
         "THFACT": {
           "type": "number",
+          "description": "THRUST MULTIPLIER",
           "format": "double"
         },
         "FTOCL": {
           "type": "number",
+          "description": "TAKEOFF LIFT FACTOR",
           "format": "double"
         },
         "FTOCD": {
           "type": "number",
+          "description": "TAKEOFF DRAG FACTOR",
           "format": "double"
         },
         "IGOBS": {
           "type": "integer",
+          "description": "GEAR RETRACT AT OBSTACLE ?",
           "format": "int32"
         },
         "TDELG": {
           "type": "number",
+          "description": "TIME DELAY AFTER L.O./OBS [SEC]",
           "format": "double"
         },
         "TIGEAR": {
           "type": "number",
+          "description": "TIME REQ. TO RETRACT GEAR [SEC]",
           "format": "double"
         },
         "PILOTT": {
           "type": "number",
+          "description": "PILOT REACTION TIME [SEC]",
           "format": "double"
         },
         "DELVTO": {
           "type": "number",
+          "description": "GROUND RUN VELOCITY STEP [FT/SEC]",
           "format": "double"
         },
         "DELTRO": {
           "type": "number",
+          "description": "ROTATION TIME STEP [SEC]",
           "format": "double"
         },
         "DELTCL": {
           "type": "number",
+          "description": "CLIMBOUT TIME STEP [SEC]",
           "format": "double"
         },
         "IBAL": {
           "type": "integer",
+          "description": "BALANCED FIELD LENGTH ?",
           "format": "int32"
         },
         "ISPOL": {
           "type": "integer",
+          "description": "SPOILERS DURING ABORT ?",
           "format": "int32"
         },
         "IREV": {
           "type": "integer",
+          "description": "ABORT THRUST REV. OPTION",
           "format": "int32"
         },
         "INTHTO": {
           "type": "integer",
+          "description": "THRUST INPUT OPTION",
           "format": "int32"
         },
         "ITXOUT": {
           "type": "integer",
+          "description": "TAXI OUT FUEL SWITCH",
           "format": "int32"
         },
         "ALPTO": {
           "type": "array",
+          "description": "ANGLE OF ATTACK",
           "items": {
             "type": "number",
             "format": "double"
@@ -1564,6 +2074,7 @@
         },
         "CLTO": {
           "type": "array",
+          "description": "LIFT COEFFICIENT",
           "items": {
             "type": "number",
             "format": "double"
@@ -1571,6 +2082,7 @@
         },
         "CDTO": {
           "type": "array",
+          "description": "DRAG COEFFICIENT",
           "items": {
             "type": "number",
             "format": "double"
@@ -1578,6 +2090,7 @@
         },
         "VELTO": {
           "type": "array",
+          "description": "VELOCITY, FT/SEC",
           "items": {
             "type": "number",
             "format": "double"
@@ -1585,6 +2098,7 @@
         },
         "THRTO": {
           "type": "array",
+          "description": "THRUST, LB",
           "items": {
             "type": "number",
             "format": "double"
@@ -1592,94 +2106,117 @@
         },
         "CLLDM": {
           "type": "number",
+          "description": "MAXIMUM LIFT COEFFICIENT",
           "format": "double"
         },
         "CDMLD": {
           "type": "number",
+          "description": "MINIMUM DRAG COEFFICIENT",
           "format": "double"
         },
         "FCDMLD": {
           "type": "number",
+          "description": "WING FRACTION OF CDMLD  ",
           "format": "double"
         },
         "ALMXLD": {
           "type": "number",
+          "description": "MAXIMUM ANGLE OF ATTACK [DEG]",
           "format": "double"
         },
         "OBSLD": {
           "type": "number",
+          "description": "OBSTACLE HEIGHT [FT]",
           "format": "double"
         },
         "APRHGT": {
           "type": "number",
+          "description": "START APPROACH HEIGHT [FT]",
           "format": "double"
         },
         "APRANG": {
           "type": "number",
+          "description": "APPROACH FLIGHT PATH ANGLE [DEG]",
           "format": "double"
         },
         "DVAPP": {
           "type": "number",
+          "description": "DELTA APPROACH VELOCITY [KTS]",
           "format": "double"
         },
         "FLDCL": {
           "type": "number",
+          "description": "LANDING LIFT FACTOR     ",
           "format": "double"
         },
         "FLDCD": {
           "type": "number",
+          "description": "LANDING DRAG FACTOR     ",
           "format": "double"
         },
         "TDSINK": {
           "type": "number",
+          "description": "SINK RATE AT TOUCH DOWN [FT/SEC]",
           "format": "double"
         },
         "VANGLD": {
           "type": "number",
+          "description": "FLARE RATE [DEG/SEC]",
           "format": "double"
         },
         "NOFLAR": {
           "type": "integer",
+          "description": "NO FLARE ON LANDING ?   ",
           "format": "int32"
         },
         "TISPOL": {
           "type": "number",
+          "description": "TIME TO SPOILER ACTUATION [SEC]",
           "format": "double"
         },
         "TICUT": {
           "type": "number",
+          "description": "TIME TO ENGINE CUTBACK [SEC]",
           "format": "double"
         },
         "TIBRAK": {
           "type": "number",
+          "description": "TIME TO BRAKE APPLICATION [SEC]",
           "format": "double"
         },
         "ACCLIM": {
           "type": "number",
+          "description": "DECELERATION LIMIT [FT/SEC2]",
           "format": "double"
         },
         "MAGRUP": {
           "type": "integer",
+          "description": "MISSED APPROACH GEAR UP ",
           "format": "int32"
         },
         "DELHAP": {
           "type": "number",
+          "description": "APPROACH ALTITUDE STEP [FT]",
           "format": "double"
         },
         "DELDFL": {
           "type": "number",
+          "description": "FLARE DISTANCE STEP [FT]",
           "format": "double"
         },
         "DELTRN": {
           "type": "number",
+          "description": "RUNOUT TIME STEP [SEC]",
           "format": "double"
         },
         "INTHLD": {
           "type": "integer",
+          "description": "THRUST INPUT OPTION     ",
           "format": "int32"
         },
         "ALPLD": {
           "type": "array",
+          "description": "ANGLE OF ATTACK",
           "items": {
             "type": "number",
             "format": "double"
@@ -1687,6 +2224,7 @@
         },
         "CLLD": {
           "type": "array",
+          "description": "LIFT COEFFICIENT",
           "items": {
             "type": "number",
             "format": "double"
@@ -1694,6 +2232,7 @@
         },
         "CDLD": {
           "type": "array",
+          "description": "DRAG COEFFICIENT",
           "items": {
             "type": "number",
             "format": "double"
@@ -1701,6 +2240,7 @@
         },
         "VELLD": {
           "type": "array",
+          "description": "VELOCITY, FT/SEC",
           "items": {
             "type": "number",
             "format": "double"
@@ -1708,6 +2248,7 @@
         },
         "THRLD": {
           "type": "array",
+          "description": "THRUST, LB",
           "items": {
             "type": "number",
             "format": "double"
@@ -1717,49 +2258,64 @@
     },
     "OutputAerodynamicData": {
       "type": "object",
+      "description": "AERODYNAMIC DATA",
       "additionalProperties": false,
       "properties": {
         "MACH_NUMBER": {
           "type": "number",
+          "description": "MACH NUMBER",
           "format": "double"
         },
         "ALTITUDE": {
           "type": "number",
+          "description": "ALTITUDE [FT]",
           "format": "double"
         },
         "REFERENCE_AREA": {
           "type": "number",
+          "description": "REFERENCE AREA [SQ FT]",
           "format": "double"
         },
         "TECHNOLOGY_LEVEL": {
           "type": "number",
+          "description": "TECHNOLOGY LEVEL",
           "format": "double"
         },
         "COMPONENT_DRAG_DATA": {
           "type": "array",
+          "description": "COMPONENT DRAG DATA",
           "items": {
             "$ref": "#/definitions/ComponentDragData"
           }
         },
         "CHANGE_IN_DRAG_COEFFICIENT": {
-          "$ref": "#/definitions/ChangeDragCoefficient"
+          "description": "COMPONENT DRAG DATA",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ChangeDragCoefficient"
+            }
+          ]
         },
         "DRAG_POLARS": {
           "type": "array",
+          "description": "COMPONENT DRAG DATA",
           "items": {
             "$ref": "#/definitions/DragPolar"
           }
         },
         "DESIGN_MACH_NUMBER": {
           "type": "number",
+          "description": "DESIGN MACH NUMBER",
           "format": "double"
         },
         "DESIGN_CL": {
           "type": "number",
+          "description": "DESIGN CL",
           "format": "double"
         },
         "MACH": {
           "type": "array",
+          "description": "MACH",
           "items": {
             "type": "number",
             "format": "double"
@@ -1767,6 +2323,7 @@
         },
         "CDF": {
           "type": "array",
+          "description": "CDF",
           "items": {
             "type": "number",
             "format": "double"
@@ -1774,6 +2331,7 @@
         },
         "CDC": {
           "type": "array",
+          "description": "CDC",
           "items": {
             "type": "number",
             "format": "double"
@@ -1781,6 +2339,7 @@
         },
         "BUFFET_CL": {
           "type": "array",
+          "description": "BUFFET CL",
           "items": {
             "type": "number",
             "format": "double"
@@ -1788,6 +2347,7 @@
         },
         "CL": {
           "type": "array",
+          "description": "CL",
           "items": {
             "type": "number",
             "format": "double"
@@ -1795,59 +2355,76 @@
         },
         "CDI": {
           "type": "array",
+          "description": "CDI",
           "items": {
             "type": "number",
             "format": "double"
           }
         },
         "PRESSURE_DRAG_COEFFICIENTS": {
-          "$ref": "#/definitions/PressureDrag"
+          "description": "PRESSURE DRAG COEFFICIENTS",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/PressureDrag"
+            }
+          ]
         }
       }
     },
     "ComponentDragData": {
       "type": "object",
+      "description": "ComponentDragData",
       "additionalProperties": false,
       "properties": {
         "COMPONENT": {
-          "type": "string"
+          "type": "string",
+          "description": "COMPONENT"
         },
         "SWET": {
           "type": "number",
+          "description": "SWET",
           "format": "double"
         },
         "LENGTH": {
           "type": "number",
+          "description": "LENGTH",
           "format": "double"
         },
         "FINENESS": {
           "type": "number",
+          "description": "FINENESS",
           "format": "double"
         },
         "FORM": {
           "type": "number",
+          "description": "FORM",
           "format": "double"
         },
         "RN": {
           "type": "number",
+          "description": "RN",
           "format": "double"
         },
         "CF": {
           "type": "number",
+          "description": "CF",
           "format": "double"
         },
         "CDF": {
           "type": "number",
+          "description": "CDF",
           "format": "double"
         }
       }
     },
     "ChangeDragCoefficient": {
       "type": "object",
+      "description": "ChangeDragCoefficient",
       "additionalProperties": false,
       "properties": {
         "ALTITUDE": {
           "type": "array",
+          "description": "ALTITUDE",
           "items": {
             "type": "number",
             "format": "double"
@@ -1855,6 +2432,7 @@
         },
         "MACH": {
           "type": "array",
+          "description": "MACH",
           "items": {
             "type": "number",
             "format": "double"
@@ -1862,6 +2440,7 @@
         },
         "VALUES": {
           "type": "array",
+          "description": "VALUES",
           "items": {
             "type": "array",
             "items": {
@@ -1874,14 +2453,17 @@
     },
     "DragPolar": {
       "type": "object",
+      "description": "DragPolar",
       "additionalProperties": false,
       "properties": {
         "ALTITUDE": {
           "type": "number",
+          "description": "ALTITUDE [FT]",
           "format": "double"
         },
         "MACH": {
           "type": "array",
+          "description": "MACH",
           "items": {
             "type": "number",
             "format": "double"
@@ -1889,6 +2471,7 @@
         },
         "CL": {
           "type": "array",
+          "description": "CL",
           "items": {
             "type": "number",
             "format": "double"
@@ -1896,6 +2479,7 @@
         },
         "VALUES": {
           "type": "array",
+          "description": "VALUES",
           "items": {
             "type": "array",
             "items": {
@@ -1908,10 +2492,12 @@
     },
     "PressureDrag": {
       "type": "object",
+      "description": "PressureDrag",
       "additionalProperties": false,
       "properties": {
         "MACH": {
           "type": "array",
+          "description": "MACH",
           "items": {
             "type": "number",
             "format": "double"
@@ -1919,6 +2505,7 @@
         },
         "CL": {
           "type": "array",
+          "description": "CL",
           "items": {
             "type": "number",
             "format": "double"
@@ -1926,6 +2513,7 @@
         },
         "VALUES": {
           "type": "array",
+          "description": "VALUES",
           "items": {
             "type": "array",
             "items": {
@@ -1938,46 +2526,65 @@
     },
     "CruiseOptimizationResult": {
       "type": "object",
+      "description": "AERODYNAMIC DATA",
       "additionalProperties": false,
       "properties": {
         "SCHEDULE_NUMBER": {
           "type": "integer",
+          "description": "SCHEDULE NUMBER",
           "format": "int32"
         },
         "ITERATION_NUMBER": {
           "type": "integer",
+          "description": "ITERATION NUMBER",
           "format": "int32"
         },
         "RANGE": {
           "type": "number",
+          "description": "RANGE",
           "format": "double"
         },
         "GROSS_WEIGTH": {
           "type": "number",
+          "description": "GROSS WEIGTH",
           "format": "double"
         },
         "ENERGY_USED": {
           "type": "number",
+          "description": "ENERGY USED",
           "format": "double"
         },
         "CAPACITY": {
           "type": "number",
+          "description": "CAPACITY",
           "format": "double"
         },
         "SUMMARY_DATA": {
-          "$ref": "#/definitions/CruiseSummaryData"
+          "description": "SUMMARY DATA FOR CRUISE SCHEDULE",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/CruiseSummaryData"
+            }
+          ]
         },
         "RANGE_TIME_SUMMARY": {
-          "$ref": "#/definitions/RangeTimeSummaryData"
+          "description": "RANGE AND TIME SUMMARY FOR CRUISE SCHEDULES",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RangeTimeSummaryData"
+            }
+          ]
         }
       }
     },
     "CruiseSummaryData": {
       "type": "object",
+      "description": "CruiseSummaryData",
       "additionalProperties": false,
       "properties": {
         "WEIGHT": {
           "type": "array",
+          "description": "WEIGHT",
           "items": {
             "type": "number",
             "format": "double"
@@ -1985,6 +2592,7 @@
         },
         "ALTITUDE": {
           "type": "array",
+          "description": "ALTITUDE",
           "items": {
             "type": "number",
             "format": "double"
@@ -1992,6 +2600,7 @@
         },
         "THRUST_AVAILABLE": {
           "type": "array",
+          "description": "THRUST_AVAILABLE",
           "items": {
             "type": "number",
             "format": "double"
@@ -1999,6 +2608,7 @@
         },
         "THRUST_REQUIRED": {
           "type": "array",
+          "description": "THRUST_REQUIRED",
           "items": {
             "type": "number",
             "format": "double"
@@ -2006,6 +2616,7 @@
         },
         "FUEL_FLOW": {
           "type": "array",
+          "description": "FUEL_FLOW",
           "items": {
             "type": "number",
             "format": "double"
@@ -2013,6 +2624,7 @@
         },
         "SFC": {
           "type": "array",
+          "description": "SFC",
           "items": {
             "type": "number",
             "format": "double"
@@ -2020,6 +2632,7 @@
         },
         "MACH_NUMBER": {
           "type": "array",
+          "description": "MACH_NUMBER",
           "items": {
             "type": "number",
             "format": "double"
@@ -2027,6 +2640,7 @@
         },
         "VELOCITY": {
           "type": "array",
+          "description": "VELOCITY",
           "items": {
             "type": "number",
             "format": "double"
@@ -2034,6 +2648,7 @@
         },
         "SPECIFIC_RANGE": {
           "type": "array",
+          "description": "SPECIFIC_RANGE",
           "items": {
             "type": "number",
             "format": "double"
@@ -2041,6 +2656,7 @@
         },
         "RATE_OF_CLIMB": {
           "type": "array",
+          "description": "RATE_OF_CLIMB",
           "items": {
             "type": "number",
             "format": "double"
@@ -2048,6 +2664,7 @@
         },
         "CL": {
           "type": "array",
+          "description": "CL",
           "items": {
             "type": "number",
             "format": "double"
@@ -2055,6 +2672,7 @@
         },
         "L_D": {
           "type": "array",
+          "description": "L_D",
           "items": {
             "type": "number",
             "format": "double"
@@ -2062,6 +2680,7 @@
         },
         "ENGINES_OPERATING": {
           "type": "array",
+          "description": "ENGINES_OPERATING",
           "items": {
             "type": "number",
             "format": "double"
@@ -2069,6 +2688,7 @@
         },
         "NOX_RATE": {
           "type": "array",
+          "description": "NOX_RATE",
           "items": {
             "type": "number",
             "format": "double"
@@ -2078,10 +2698,12 @@
     },
     "RangeTimeSummaryData": {
       "type": "object",
+      "description": "RangeTimeSummaryData",
       "additionalProperties": false,
       "properties": {
         "WEIGHT": {
           "type": "array",
+          "description": "WEIGHT [LB]",
           "items": {
             "type": "number",
             "format": "double"
@@ -2089,6 +2711,7 @@
         },
         "RANGE": {
           "type": "array",
+          "description": "RANGE [NM]",
           "items": {
             "type": "number",
             "format": "double"
@@ -2096,6 +2719,7 @@
         },
         "TIME": {
           "type": "array",
+          "description": "TIME [HR]",
           "items": {
             "type": "number",
             "format": "double"
@@ -2105,94 +2729,117 @@
     },
     "OutputWeightData": {
       "type": "object",
+      "description": "OUTPUT FROM THE WEIGHTS MODULE",
       "additionalProperties": false,
       "properties": {
         "WING_BENDING_FACTOR": {
           "type": "number",
+          "description": "WING BENDING FACTOR [None]",
           "format": "double"
         },
         "ENGINE_INERTIA_RELIEF_FACTOR": {
           "type": "number",
+          "description": "ENGINE INERTIA RELIEF FACTOR [None]",
           "format": "double"
         },
         "WING_WEIGHT_BREAKDOWN_TERM_1": {
           "type": "number",
+          "description": "WING WEIGHT BREAKDOWN TERM 1 [LB]\n            ",
           "format": "double"
         },
         "WING_WEIGHT_BREAKDOWN_TERM_2": {
           "type": "number",
+          "description": "WING WEIGHT BREAKDOWN TERM 2 [LB]\n            ",
           "format": "double"
         },
         "WING_WEIGHT_BREAKDOWN_TERM_3": {
           "type": "number",
+          "description": "WING WEIGHT BREAKDOWN TERM 3 [LB]\n            ",
           "format": "double"
         },
         "WING_SPAN": {
           "type": "number",
+          "description": "WING SPAN [FT]",
           "format": "double"
         },
         "WING_GLOVE_AREA": {
           "type": "number",
+          "description": "WING GLOVE AREA [SQ FT]",
           "format": "double"
         },
         "HORIZONTAL_TAIL_AREA": {
           "type": "number",
+          "description": "HORIZONTAL TAIL AREA [SQ FT]",
           "format": "double"
         },
         "HORIZONTAL_TAIL_AREA_MODIFIED_VOLUME_COEFFICIENT": {
           "type": "number",
+          "description": "HORIZONTAL TAIL AREA MODIFIED VOLUME COEFFICIENT [None]",
           "format": "double"
         },
         "VERTICAL_TAIL_AREA": {
           "type": "number",
+          "description": "VERTICAL TAIL AREA [SQ FT]",
           "format": "double"
         },
         "VERTICAL_TAIL_AREA_MODIFIED_VOLUME_COEFFICIENT": {
           "type": "number",
+          "description": "VERTICAL TAIL AREA MODIFIED VOLUME COEFFICIENT [None]",
           "format": "double"
         },
         "NACELLE_LENGTH": {
           "type": "number",
+          "description": "NACELLE LENGTH [FT]",
           "format": "double"
         },
         "NACELLE_DIAMETER": {
           "type": "number",
+          "description": "NACELLE DIAMETER [FT]",
           "format": "double"
         },
         "LENGTH_OF_MAIN_GEAR": {
           "type": "number",
+          "description": "LENGTH OF MAIN GEAR [IN]",
           "format": "double"
         },
         "LENGTH_OF_NOSE_GEAR": {
           "type": "number",
+          "description": "LENGTH OF NOSE GEAR [IN]",
           "format": "double"
         },
         "MAXIMUM_LANDING_WEIGHT": {
           "type": "number",
+          "description": "MAXIMUM LANDING WEIGHT [LB]",
           "format": "double"
         },
         "WING_FUEL_CAPACITY": {
           "type": "number",
+          "description": "WING FUEL CAPACITY [LB]",
           "format": "double"
         },
         "FUSELAGE_FUEL_CAPACITY": {
           "type": "number",
+          "description": "FUSELAGE FUEL CAPACITY [LB]",
           "format": "double"
         },
         "AUXILIARY_TANK_CAPACITY": {
           "type": "number",
+          "description": "AUXILIARY TANK CAPACITY [LB]",
           "format": "double"
         },
         "TOTAL_FUEL_CAPACITY": {
           "type": "number",
+          "description": "TOTAL FUEL CAPACITY [LB]",
           "format": "double"
         },
         "EXCESS_FUEL_CAPACITY": {
           "type": "number",
+          "description": "EXCESS FUEL CAPACITY [LB]",
           "format": "double"
         },
         "MASS_AND_BALANCE_SUMMARY": {
           "type": "array",
+          "description": "MASS AND BALANCE SUMMARY",
           "items": {
             "$ref": "#/definitions/MassAndBalanceSummaryComponent"
           }
@@ -2201,85 +2848,117 @@
     },
     "MassAndBalanceSummaryComponent": {
       "type": "object",
+      "description": "ComponentDragData",
       "additionalProperties": false,
       "properties": {
         "NAME": {
-          "type": "string"
+          "type": "string",
+          "description": "MASS_AND_BALANCE_SUMMARY"
         },
         "PERCENT_WREF": {
           "type": "number",
+          "description": "PERCENT_WREF",
           "format": "double"
         },
         "POUNDS": {
           "type": "number",
+          "description": "POUNDS",
           "format": "double"
         },
         "PERCENT_LREF": {
           "type": "number",
+          "description": "PERCENT_LREF",
           "format": "double"
         },
         "HORI_CG": {
           "type": "number",
+          "description": "HORI_CG [IN]",
           "format": "double"
         }
       }
     },
     "MissionRun": {
       "type": "object",
+      "description": "Mission results for a particular range value",
       "additionalProperties": false,
       "properties": {
         "NONCRUISE_SEGMENT_RESULTS": {
-          "$ref": "#/definitions/NoncruiseSegmentResults"
+          "description": "NONCRUISE SEGMENT RESULTS",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/NoncruiseSegmentResults"
+            }
+          ]
         },
         "SIZING_AND_PERFORMANCE_RESULTS": {
-          "$ref": "#/definitions/SizingAndPerformanceResults"
+          "description": "SIZING AND PERFORMANCE RESULTS",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SizingAndPerformanceResults"
+            }
+          ]
         },
         "DETAILED_FLIGHT_SEGMENT_SUMMARY": {
-          "$ref": "#/definitions/DetailedFlightSegmentSummary"
+          "description": "DETAILED FLIGHT SEGMENT SUMMARY",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DetailedFlightSegmentSummary"
+            }
+          ]
         }
       }
     },
     "NoncruiseSegmentResults": {
       "type": "object",
+      "description": "NONCRUISE SEGMENT RESULTS",
       "additionalProperties": false,
       "properties": {
         "PROFILES": {
           "type": "array",
+          "description": "PROFILES",
           "items": {
             "$ref": "#/definitions/NonCruiseProfileData"
           }
         },
         "ITERATION_NUMBER": {
           "type": "integer",
+          "description": "ITERATION NUMBER",
           "format": "int32"
         },
         "RANGE": {
           "type": "number",
+          "description": "RANGE",
           "format": "double"
         },
         "GROSS_WEIGTH": {
           "type": "number",
+          "description": "GROSS WEIGTH",
           "format": "double"
         },
         "ENERGY_USED": {
           "type": "number",
+          "description": "ENERGY USED",
           "format": "double"
         },
         "CAPACITY": {
           "type": "number",
+          "description": "CAPACITY",
           "format": "double"
         }
       }
     },
     "NonCruiseProfileData": {
       "type": "object",
+      "description": "Non-cruise Profile Data",
       "additionalProperties": false,
       "properties": {
         "SEGMENT": {
-          "type": "string"
+          "type": "string",
+          "description": "SEGMENT"
         },
         "WEIGHT": {
           "type": "array",
+          "description": "WEIGHT",
           "items": {
             "type": "number",
             "format": "double"
@@ -2287,6 +2966,7 @@
         },
         "ENERGY": {
           "type": "array",
+          "description": "ENERGY",
           "items": {
             "type": "number",
             "format": "double"
@@ -2294,6 +2974,7 @@
         },
         "ALT": {
           "type": "array",
+          "description": "ALT",
           "items": {
             "type": "number",
             "format": "double"
@@ -2301,6 +2982,7 @@
         },
         "MACH": {
           "type": "array",
+          "description": "MACH",
           "items": {
             "type": "number",
             "format": "double"
@@ -2308,6 +2990,7 @@
         },
         "VEL": {
           "type": "array",
+          "description": "VEL",
           "items": {
             "type": "number",
             "format": "double"
@@ -2315,6 +2998,7 @@
         },
         "RCI": {
           "type": "array",
+          "description": "RCI",
           "items": {
             "type": "number",
             "format": "double"
@@ -2322,6 +3006,7 @@
         },
         "PC": {
           "type": "array",
+          "description": "PC",
           "items": {
             "type": "number",
             "format": "double"
@@ -2329,6 +3014,7 @@
         },
         "INCREMENTAL_TIME": {
           "type": "array",
+          "description": "INCREMENTAL_TIME",
           "items": {
             "type": "number",
             "format": "double"
@@ -2336,6 +3022,7 @@
         },
         "INCREMENTAL_DIST": {
           "type": "array",
+          "description": "INCREMENTAL_DIST",
           "items": {
             "type": "number",
             "format": "double"
@@ -2343,6 +3030,7 @@
         },
         "INREMENTAL_FUEL": {
           "type": "array",
+          "description": "INREMENTAL_FUEL",
           "items": {
             "type": "number",
             "format": "double"
@@ -2350,6 +3038,7 @@
         },
         "Q": {
           "type": "array",
+          "description": "Q",
           "items": {
             "type": "number",
             "format": "double"
@@ -2357,6 +3046,7 @@
         },
         "CUMULATIVE_TIME": {
           "type": "array",
+          "description": "CUMULATIVE_TIME",
           "items": {
             "type": "number",
             "format": "double"
@@ -2364,6 +3054,7 @@
         },
         "CUMULATIVE_DIST": {
           "type": "array",
+          "description": "CUMULATIVE_DIST",
           "items": {
             "type": "number",
             "format": "double"
@@ -2371,6 +3062,7 @@
         },
         "CUMULATIVE_FUEL": {
           "type": "array",
+          "description": "FUEL",
           "items": {
             "type": "number",
             "format": "double"
@@ -2378,6 +3070,7 @@
         },
         "CL": {
           "type": "array",
+          "description": "CL",
           "items": {
             "type": "number",
             "format": "double"
@@ -2385,6 +3078,7 @@
         },
         "L_D": {
           "type": "array",
+          "description": "L/D",
           "items": {
             "type": "number",
             "format": "double"
@@ -2392,6 +3086,7 @@
         },
         "THRUST": {
           "type": "array",
+          "description": "THRUST",
           "items": {
             "type": "number",
             "format": "double"
@@ -2399,6 +3094,7 @@
         },
         "THRUST_TMAX": {
           "type": "array",
+          "description": "/TMAX",
           "items": {
             "type": "number",
             "format": "double"
@@ -2408,185 +3104,237 @@
     },
     "SizingAndPerformanceResults": {
       "type": "object",
+      "description": "SIZING AND PERFORMANCE RESULTS",
       "additionalProperties": false,
       "properties": {
         "CONFIGURATION_DATA_AFTER_RESIZING": {
-          "$ref": "#/definitions/ConfigurationDataAfterResizing"
+          "description": "CONFIGURATION DATA AFTER RESIZING (IF ANY)",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ConfigurationDataAfterResizing"
+            }
+          ]
         },
         "MISSION_SUMMARY": {
-          "$ref": "#/definitions/MissionSummary"
+          "description": "* * *  MISSION SUMMARY  * * *",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/MissionSummary"
+            }
+          ]
         }
       }
     },
     "ConfigurationDataAfterResizing": {
       "type": "object",
+      "description": "CONFIGURATION DATA AFTER RESIZING (IF ANY)",
       "additionalProperties": false,
       "properties": {
         "OPERATING_WEIGHT_EMPTY": {
           "type": "number",
+          "description": "OPERATING WEIGHT EMPTY [LB]",
           "format": "double"
         },
         "PAYLOAD": {
           "type": "number",
+          "description": "PAYLOAD [LB]",
           "format": "double"
         },
         "MAXIMUM_FUEL": {
           "type": "number",
+          "description": "MAXIMUM FUEL [LB]",
           "format": "double"
         },
         "GROSS_WEIGHT": {
           "type": "number",
+          "description": "GROSS WEIGHT [LB]",
           "format": "double"
         },
         "REFERENCE_WING_AREA": {
           "type": "number",
+          "description": "REFERENCE WING AREA [SQ FT]",
           "format": "double"
         },
         "WING_LOADING": {
           "type": "number",
+          "description": "WING LOADING [LB / SQ FT]",
           "format": "double"
         },
         "THRUST_PER_ENGINE": {
           "type": "number",
+          "description": "THRUST PER ENGINE [LB]",
           "format": "double"
         },
         "ENGINE_SCALE_FACTOR": {
           "type": "number",
+          "description": "ENGINE SCALE FACTOR [None]",
           "format": "double"
         },
         "THRUST_WEIGHT_RATIO": {
           "type": "number",
+          "description": "THRUST-WEIGHT RATIO [None]",
           "format": "double"
         }
       }
     },
     "MissionSummary": {
       "type": "object",
+      "description": "* * *  MISSION SUMMARY  * * *",
       "additionalProperties": false,
       "properties": {
         "SEGMENTS": {
           "type": "array",
+          "description": "SEGMENTS",
           "items": {
             "$ref": "#/definitions/MissionSummarySegment"
           }
         },
         "DESIGN_RANGE": {
           "type": "number",
+          "description": "DESIGN RANGE [NM]",
           "format": "double"
         },
         "FLIGHT_TIME": {
           "type": "number",
+          "description": "FLIGHT TIME [MIN]",
           "format": "double"
         },
         "BLOCK_TIME": {
           "type": "number",
+          "description": "BLOCK TIME [HR]",
           "format": "double"
         },
         "BLOCK_FUEL": {
           "type": "number",
+          "description": "BLOCK FUEL [LB]",
           "format": "double"
         },
         "TOTAL_NITROGEN_OXIDES_EMISSIONS": {
           "type": "number",
+          "description": "TOTAL NITROGEN OXIDES EMISSIONS [LB]",
           "format": "double"
         },
         "ATA_TRAFFIC_ALLOWANCE": {
           "type": "number",
+          "description": "ATA TRAFFIC ALLOWANCE [NM]",
           "format": "double"
         },
         "AIR_MANEUVER": {
           "type": "number",
+          "description": "AIR MANEUVER [NM]",
           "format": "double"
         },
         "AIRPORT_TRAFFIC_ALLOWANCE": {
           "type": "number",
+          "description": "AIRPORT TRAFFIC ALLOWANCE [NM]",
           "format": "double"
         },
         "AIRWAY_DISTANCE_FACTOR": {
           "type": "number",
+          "description": "AIRWAY DISTANCE FACTOR [NM]",
           "format": "double"
         },
         "ATA_RANGE": {
           "type": "number",
+          "description": "ATA RANGE [NM]",
           "format": "double"
         }
       }
     },
     "MissionSummarySegment": {
       "type": "object",
+      "description": "MissionSummarySegment",
       "additionalProperties": false,
       "properties": {
         "SEGMENT": {
-          "type": "string"
+          "type": "string",
+          "description": "SEGMENT"
         },
         "INITIAL_WT": {
           "type": "number",
+          "description": "INITIAL_WT",
           "format": "double"
         },
         "FUEL_SEGMT": {
           "type": "number",
+          "description": "FUEL_SEGMT",
           "format": "double"
         },
         "FUEL_TOTAL": {
           "type": "number",
+          "description": "FUEL_TOTAL",
           "format": "double"
         },
         "TIME_SEGMT": {
           "type": "number",
+          "description": "TIME_SEGMT",
           "format": "double"
         },
         "TIME_TOTAL": {
           "type": "number",
+          "description": "TIME_TOTAL",
           "format": "double"
         },
         "DIST_SEGMT": {
           "type": "number",
+          "description": "DIST_SEGMT",
           "format": "double"
         },
         "DIST_TOTAL": {
           "type": "number",
+          "description": "DIST_TOTAL",
           "format": "double"
         },
         "MACH_NUMBER_START": {
           "type": "number",
+          "description": "MACH_NUMBER_START",
           "format": "double"
         },
         "MACH_NUMBER_END": {
           "type": "number",
+          "description": "MACH_NUMBER_END",
           "format": "double"
         },
         "ALTITUDE_START": {
           "type": "number",
+          "description": "ALTITUDE_START",
           "format": "double"
         },
         "ALTITUDE_END": {
           "type": "number",
+          "description": "ALTITUDE_END",
           "format": "double"
         },
         "ALTERNATE_FUEL_SEGMT": {
           "type": "number",
+          "description": "ALTERNATE_FUEL_SEGMT",
           "format": "double"
         },
         "ALTERNATE_FUEL_TOTAL": {
           "type": "number",
+          "description": "ALTERNATE_FUEL_TOTAL",
           "format": "double"
         },
         "NOX_EMISS_SEGMT": {
           "type": "number",
+          "description": "NOX_EMISS_SEGMT",
           "format": "double"
         },
         "NOX_EMISS_TOTAL": {
           "type": "number",
+          "description": "NOX_EMISS_TOTAL",
           "format": "double"
         }
       }
     },
     "DetailedFlightSegmentSummary": {
       "type": "object",
+      "description": "DETAILED FLIGHT SEGMENT SUMMARY",
       "additionalProperties": false,
       "properties": {
         "SEGMENTS": {
           "type": "array",
+          "description": "SEGMENTS",
           "items": {
             "$ref": "#/definitions/SegmentData"
           }
@@ -2595,13 +3343,16 @@
     },
     "SegmentData": {
       "type": "object",
+      "description": "SegmentData",
       "additionalProperties": false,
       "properties": {
         "SEGMENT": {
-          "type": "string"
+          "type": "string",
+          "description": "SEGMENT"
         },
         "WEIGHT": {
           "type": "array",
+          "description": "WEIGHT",
           "items": {
             "type": "number",
             "format": "double"
@@ -2609,6 +3360,7 @@
         },
         "ALTITUDE": {
           "type": "array",
+          "description": "ALTITUDE",
           "items": {
             "type": "number",
             "format": "double"
@@ -2616,6 +3368,7 @@
         },
         "MACH": {
           "type": "array",
+          "description": "MACH_NO.",
           "items": {
             "type": "number",
             "format": "double"
@@ -2623,6 +3376,7 @@
         },
         "DELTA_T": {
           "type": "array",
+          "description": "DELTA_T",
           "items": {
             "type": "number",
             "format": "double"
@@ -2630,6 +3384,7 @@
         },
         "DELTA_D": {
           "type": "array",
+          "description": "DELTA_D",
           "items": {
             "type": "number",
             "format": "double"
@@ -2637,6 +3392,7 @@
         },
         "DELTA_F": {
           "type": "array",
+          "description": "DELTA_F",
           "items": {
             "type": "number",
             "format": "double"
@@ -2644,6 +3400,7 @@
         },
         "THRUST": {
           "type": "array",
+          "description": "THRUST",
           "items": {
             "type": "number",
             "format": "double"
@@ -2651,6 +3408,7 @@
         },
         "FUEL_FLOW": {
           "type": "array",
+          "description": "FUEL_FLOW",
           "items": {
             "type": "number",
             "format": "double"
@@ -2658,6 +3416,7 @@
         },
         "EX_POW": {
           "type": "array",
+          "description": "EX_POW",
           "items": {
             "type": "number",
             "format": "double"
@@ -2665,6 +3424,7 @@
         },
         "CLIFT": {
           "type": "array",
+          "description": "CLIFT",
           "items": {
             "type": "number",
             "format": "double"
@@ -2672,6 +3432,7 @@
         },
         "LIFT": {
           "type": "array",
+          "description": "LIFT",
           "items": {
             "type": "number",
             "format": "double"
@@ -2679,6 +3440,7 @@
         },
         "L_D": {
           "type": "array",
+          "description": "L/D",
           "items": {
             "type": "number",
             "format": "double"
@@ -2686,6 +3448,7 @@
         },
         "Q": {
           "type": "array",
+          "description": "Q",
           "items": {
             "type": "number",
             "format": "double"
@@ -2693,6 +3456,7 @@
         },
         "PCODE": {
           "type": "array",
+          "description": "PCODE",
           "items": {
             "type": "integer",
             "format": "int32"
@@ -2700,6 +3464,7 @@
         },
         "ENERGY": {
           "type": "array",
+          "description": "ENERGY",
           "items": {
             "type": "number",
             "format": "double"
@@ -2707,6 +3472,7 @@
         },
         "VELOCITY": {
           "type": "array",
+          "description": "VELOCITY",
           "items": {
             "type": "number",
             "format": "double"
@@ -2714,6 +3480,7 @@
         },
         "TIME": {
           "type": "array",
+          "description": "TIME",
           "items": {
             "type": "number",
             "format": "double"
@@ -2721,6 +3488,7 @@
         },
         "DIST": {
           "type": "array",
+          "description": "DIST",
           "items": {
             "type": "number",
             "format": "double"
@@ -2728,6 +3496,7 @@
         },
         "FUEL": {
           "type": "array",
+          "description": "FUEL",
           "items": {
             "type": "number",
             "format": "double"
@@ -2735,6 +3504,7 @@
         },
         "T_TMAX": {
           "type": "array",
+          "description": "T/TMAX",
           "items": {
             "type": "number",
             "format": "double"
@@ -2742,6 +3512,7 @@
         },
         "SFC": {
           "type": "array",
+          "description": "SFC",
           "items": {
             "type": "number",
             "format": "double"
@@ -2749,6 +3520,7 @@
         },
         "DH_DT_STAR": {
           "type": "array",
+          "description": "DH/DT*",
           "items": {
             "type": "number",
             "format": "double"
@@ -2756,6 +3528,7 @@
         },
         "CDRAG": {
           "type": "array",
+          "description": "CDRAG",
           "items": {
             "type": "number",
             "format": "double"
@@ -2763,6 +3536,7 @@
         },
         "DRAG": {
           "type": "array",
+          "description": "DRAG",
           "items": {
             "type": "number",
             "format": "double"
@@ -2770,6 +3544,7 @@
         },
         "SP_RANGE": {
           "type": "array",
+          "description": "SP_RANGE",
           "items": {
             "type": "number",
             "format": "double"
@@ -2777,6 +3552,7 @@
         },
         "NOX": {
           "type": "array",
+          "description": "NOX",
           "items": {
             "type": "number",
             "format": "double"
@@ -2784,6 +3560,7 @@
         },
         "ENG_PAR": {
           "type": "array",
+          "description": "ENG_PAR",
           "items": {
             "type": "number",
             "format": "double"
@@ -2793,10 +3570,12 @@
     },
     "LandingPerformanceResults": {
       "type": "object",
+      "description": "TAKEOFF PERFORMANCE RESULTS",
       "additionalProperties": false,
       "properties": {
         "ANGLE_OF_ATTACK": {
           "type": "array",
+          "description": "ANGLE OF ATTACK",
           "items": {
             "type": "number",
             "format": "double"
@@ -2804,6 +3583,7 @@
         },
         "LIFT_COEFFICIENT": {
           "type": "array",
+          "description": "LIFT COEFFICIENT",
           "items": {
             "type": "number",
             "format": "double"
@@ -2811,6 +3591,7 @@
         },
         "DRAG_COEFFICIENT": {
           "type": "array",
+          "description": "DRAG COEFFICIENT",
           "items": {
             "type": "number",
             "format": "double"
@@ -2818,26 +3599,32 @@
         },
         "CDMLD": {
           "type": "number",
+          "description": "CDMTO",
           "format": "double"
         },
         "CDGEAR": {
           "type": "number",
+          "description": "CDGEAR",
           "format": "double"
         },
         "CDEOUT": {
           "type": "number",
+          "description": "CDEOUT",
           "format": "double"
         },
         "CLLDM": {
           "type": "number",
+          "description": "CLTOM",
           "format": "double"
         },
         "LANDING_WEIGHT": {
           "type": "number",
+          "description": "TAKEOFF WEIGHT",
           "format": "double"
         },
         "VELOCITY": {
           "type": "array",
+          "description": "VELOCITY",
           "items": {
             "type": "number",
             "format": "double"
@@ -2845,25 +3632,38 @@
         },
         "THRUST": {
           "type": "array",
+          "description": "THRUST",
           "items": {
             "type": "number",
             "format": "double"
           }
         },
         "LANDING_DATA": {
-          "$ref": "#/definitions/LandingData"
+          "description": "LANDING DATA",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/LandingData"
+            }
+          ]
         },
         "Empty": {
-          "$ref": "#/definitions/LandingPerformanceResults"
+          "description": "Empty",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/LandingPerformanceResults"
+            }
+          ]
         }
       }
     },
     "LandingData": {
       "type": "object",
+      "description": "TakeoffData",
       "additionalProperties": false,
       "properties": {
         "TIME": {
           "type": "array",
+          "description": "TIME",
           "items": {
             "type": "number",
             "format": "double"
@@ -2871,6 +3671,7 @@
         },
         "DISTANCE": {
           "type": "array",
+          "description": "DISTANCE",
           "items": {
             "type": "number",
             "format": "double"
@@ -2878,6 +3679,7 @@
         },
         "ALTITUDE": {
           "type": "array",
+          "description": "ALTITUDE",
           "items": {
             "type": "number",
             "format": "double"
@@ -2885,6 +3687,7 @@
         },
         "VELOCITY": {
           "type": "array",
+          "description": "VELOCITY",
           "items": {
             "type": "number",
             "format": "double"
@@ -2892,6 +3695,7 @@
         },
         "MACH": {
           "type": "array",
+          "description": "MACH",
           "items": {
             "type": "number",
             "format": "double"
@@ -2899,6 +3703,7 @@
         },
         "GLIDE_SLOPE": {
           "type": "array",
+          "description": "CLIMB ANGLE",
           "items": {
             "type": "number",
             "format": "double"
@@ -2906,6 +3711,7 @@
         },
         "ATTACK_ANGLE": {
           "type": "array",
+          "description": "ATTACK ANGLE",
           "items": {
             "type": "number",
             "format": "double"
@@ -2913,6 +3719,7 @@
         },
         "ENGINE_INCIDENCE": {
           "type": "array",
+          "description": "ENGINE INCIDENCE",
           "items": {
             "type": "number",
             "format": "double"
@@ -2920,6 +3727,7 @@
         },
         "ENGINE_THRUST": {
           "type": "array",
+          "description": "ENGINE THRUST",
           "items": {
             "type": "number",
             "format": "double"
@@ -2927,6 +3735,7 @@
         },
         "LIFT_COEFFICIENT": {
           "type": "array",
+          "description": "LIFT COEFFICIENT",
           "items": {
             "type": "number",
             "format": "double"
@@ -2934,6 +3743,7 @@
         },
         "DRAG_COEFFICIENT": {
           "type": "array",
+          "description": "DRAG COEFFICIENT",
           "items": {
             "type": "number",
             "format": "double"
@@ -2941,6 +3751,7 @@
         },
         "L_D": {
           "type": "array",
+          "description": "L/D",
           "items": {
             "type": "number",
             "format": "double"
@@ -2948,6 +3759,7 @@
         },
         "DECELERATION": {
           "type": "array",
+          "description": "ACCELERATION",
           "items": {
             "type": "number",
             "format": "double"
@@ -2955,55 +3767,67 @@
         },
         "POINTS": {
           "type": "array",
+          "description": "ENGINE",
           "items": {
             "$ref": "#/definitions/LandingPoint"
           }
         },
         "FLIGHT_PATH_SLOPE": {
           "type": "number",
+          "description": "FLIGHT PATH SLOPE",
           "format": "double"
         },
         "NET_THRUST": {
           "type": "number",
+          "description": "NET THRUST",
           "format": "double"
         }
       }
     },
     "LandingPoint": {
       "type": "object",
+      "description": "LandingPoint",
       "additionalProperties": false,
       "properties": {
         "NAME": {
-          "type": "string"
+          "type": "string",
+          "description": "NAME"
         },
         "VELOCITY": {
           "type": "number",
+          "description": "VELOCITY",
           "format": "double"
         },
         "TIME": {
           "type": "number",
+          "description": "TIME",
           "format": "double"
         },
         "DISTANCE": {
           "type": "number",
+          "description": "DISTANCE",
           "format": "double"
         },
         "ALPHA": {
           "type": "number",
+          "description": "ALPHA",
           "format": "double"
         },
         "ALTITUDE": {
           "type": "number",
+          "description": "ALTITUDE",
           "format": "double"
         }
       }
     },
     "TakeoffPerformanceResults": {
       "type": "object",
+      "description": "TAKEOFF PERFORMANCE RESULTS",
       "additionalProperties": false,
       "properties": {
         "ANGLE_OF_ATTACK": {
           "type": "array",
+          "description": "ANGLE OF ATTACK",
           "items": {
             "type": "number",
             "format": "double"
@@ -3011,6 +3835,7 @@
         },
         "LIFT_COEFFICIENT": {
           "type": "array",
+          "description": "LIFT COEFFICIENT",
           "items": {
             "type": "number",
             "format": "double"
@@ -3018,6 +3843,7 @@
         },
         "DRAG_COEFFICIENT": {
           "type": "array",
+          "description": "DRAG COEFFICIENT",
           "items": {
             "type": "number",
             "format": "double"
@@ -3025,26 +3851,32 @@
         },
         "CDMTO": {
           "type": "number",
+          "description": "CDMTO",
           "format": "double"
         },
         "CDGEAR": {
           "type": "number",
+          "description": "CDGEAR",
           "format": "double"
         },
         "CDEOUT": {
           "type": "number",
+          "description": "CDEOUT",
           "format": "double"
         },
         "CLTOM": {
           "type": "number",
+          "description": "CLTOM",
           "format": "double"
         },
         "TAKEOFF_WEIGHT": {
           "type": "number",
+          "description": "TAKEOFF WEIGHT",
           "format": "double"
         },
         "VELOCITY": {
           "type": "array",
+          "description": "VELOCITY",
           "items": {
             "type": "number",
             "format": "double"
@@ -3052,22 +3884,43 @@
         },
         "THRUST": {
           "type": "array",
+          "description": "THRUST",
           "items": {
             "type": "number",
             "format": "double"
           }
         },
         "ABORTED_TAKEOFF_ALL_ENGINES_OPERATING": {
-          "$ref": "#/definitions/AbortedTakeoffData"
+          "description": "ABORTED TAKEOFF - ALL ENGINES OPERATING",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AbortedTakeoffData"
+            }
+          ]
         },
         "ABORTED_TAKEOFF_ONE_ENGINE_OUT": {
-          "$ref": "#/definitions/AbortedTakeoffData"
+          "description": "ABORTED TAKEOFF - ONE ENGINE OUT",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AbortedTakeoffData"
+            }
+          ]
         },
         "ONE_ENGINE_OUT_TAKEOFF": {
-          "$ref": "#/definitions/OneEngineOutTakeoffData"
+          "description": "ONE ENGINE OUT TAKEOFF",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/OneEngineOutTakeoffData"
+            }
+          ]
         },
         "ALL_ENGINES_OPERATING_TAKEOFF": {
-          "$ref": "#/definitions/AllEnginesOperativeTakeoffData"
+          "description": "ALL ENGINES OPERATING TAKEOFF",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AllEnginesOperativeTakeoffData"
+            }
+          ]
         }
       }
     },
@@ -3078,10 +3931,12 @@
         },
         {
           "type": "object",
+          "description": "ABORTED TAKEOFF - ALL ENGINES OPERATING",
           "additionalProperties": false,
           "properties": {
             "POINTS": {
               "type": "array",
+              "description": "ENGINE",
               "items": {
                 "$ref": "#/definitions/AbortedTakeoffPoint"
               }
@@ -3092,31 +3947,38 @@
     },
     "AbortedTakeoffPoint": {
       "type": "object",
+      "description": "AbortedTakeoffPoint",
       "additionalProperties": false,
       "properties": {
         "NAME": {
-          "type": "string"
+          "type": "string",
+          "description": "ACCELERATE_-_STOP_DISTANCE"
         },
         "VELOCITY": {
           "type": "number",
+          "description": "VELOCITY",
           "format": "double"
         },
         "TIME": {
           "type": "number",
+          "description": "TIME",
           "format": "double"
         },
         "DISTANCE": {
           "type": "number",
+          "description": "DISTANCE",
           "format": "double"
         }
       }
     },
     "TakeoffData": {
       "type": "object",
+      "description": "TakeoffData",
       "additionalProperties": false,
       "properties": {
         "TIME": {
           "type": "array",
+          "description": "TIME",
           "items": {
             "type": "number",
             "format": "double"
@@ -3124,6 +3986,7 @@
         },
         "DISTANCE": {
           "type": "array",
+          "description": "DISTANCE",
           "items": {
             "type": "number",
             "format": "double"
@@ -3131,6 +3994,7 @@
         },
         "ALTITUDE": {
           "type": "array",
+          "description": "ALTITUDE",
           "items": {
             "type": "number",
             "format": "double"
@@ -3138,6 +4002,7 @@
         },
         "VELOCITY": {
           "type": "array",
+          "description": "VELOCITY",
           "items": {
             "type": "number",
             "format": "double"
@@ -3145,6 +4010,7 @@
         },
         "MACH": {
           "type": "array",
+          "description": "MACH",
           "items": {
             "type": "number",
             "format": "double"
@@ -3152,6 +4018,7 @@
         },
         "CLIMB_ANGLE": {
           "type": "array",
+          "description": "CLIMB ANGLE",
           "items": {
             "type": "number",
             "format": "double"
@@ -3159,6 +4026,7 @@
         },
         "ATTACK_ANGLE": {
           "type": "array",
+          "description": "ATTACK ANGLE",
           "items": {
             "type": "number",
             "format": "double"
@@ -3166,6 +4034,7 @@
         },
         "ENGINE_INCIDENCE": {
           "type": "array",
+          "description": "ENGINE INCIDENCE",
           "items": {
             "type": "number",
             "format": "double"
@@ -3173,6 +4042,7 @@
         },
         "ENGINE_THRUST": {
           "type": "array",
+          "description": "ENGINE THRUST",
           "items": {
             "type": "number",
             "format": "double"
@@ -3180,6 +4050,7 @@
         },
         "LIFT_COEFFICIENT": {
           "type": "array",
+          "description": "LIFT COEFFICIENT",
           "items": {
             "type": "number",
             "format": "double"
@@ -3187,6 +4058,7 @@
         },
         "DRAG_COEFFICIENT": {
           "type": "array",
+          "description": "DRAG COEFFICIENT",
           "items": {
             "type": "number",
             "format": "double"
@@ -3194,6 +4066,7 @@
         },
         "L_D": {
           "type": "array",
+          "description": "L/D",
           "items": {
             "type": "number",
             "format": "double"
@@ -3201,6 +4074,7 @@
         },
         "ACCELERATION": {
           "type": "array",
+          "description": "ACCELERATION",
           "items": {
             "type": "number",
             "format": "double"
@@ -3215,20 +4089,24 @@
         },
         {
           "type": "object",
+          "description": "ABORTED TAKEOFF - ALL ENGINES OPERATING",
           "additionalProperties": false,
           "properties": {
             "POINTS": {
               "type": "array",
+              "description": "ENGINE",
               "items": {
                 "$ref": "#/definitions/TakeoffPoint"
               }
             },
             "FLIGHT_PATH_SLOPE": {
               "type": "number",
+              "description": "FLIGHT PATH SLOPE (%)",
               "format": "double"
             },
             "NET_THRUST": {
               "type": "number",
+              "description": "NET THRUST (LB)",
               "format": "double"
             }
           }
@@ -3237,29 +4115,36 @@
     },
     "TakeoffPoint": {
       "type": "object",
+      "description": "TakeoffPoint",
       "additionalProperties": false,
       "properties": {
         "NAME": {
-          "type": "string"
+          "type": "string",
+          "description": "NAME"
         },
         "VELOCITY": {
           "type": "number",
+          "description": "VELOCITY",
           "format": "double"
         },
         "TIME": {
           "type": "number",
+          "description": "TIME",
           "format": "double"
         },
         "DISTANCE": {
           "type": "number",
+          "description": "DISTANCE",
           "format": "double"
         },
         "ALPHA": {
           "type": "number",
+          "description": "ALPHA",
           "format": "double"
         },
         "GAMMA": {
           "type": "number",
+          "description": "GAMMA",
           "format": "double"
         }
       }
@@ -3271,16 +4156,19 @@
         },
         {
           "type": "object",
+          "description": "ABORTED TAKEOFF - ALL ENGINES OPERATING",
           "additionalProperties": false,
           "properties": {
             "POINTS": {
               "type": "array",
+              "description": "ENGINE",
               "items": {
                 "$ref": "#/definitions/TakeoffPoint"
               }
             },
             "FAR_TAKEOFF_FIELD_LENGTH": {
               "type": "number",
+              "description": "FAR TAKEOFF FIELD LENGTH",
               "format": "double"
             }
           }
@@ -3289,94 +4177,117 @@
     },
     "ObjVarConstrSummary": {
       "type": "object",
+      "description": "OBJ/VAR/CONSTR SUMMARY",
       "additionalProperties": false,
       "properties": {
         "FUEL": {
           "type": "number",
+          "description": "FUEL",
           "format": "double"
         },
         "RANGE": {
           "type": "number",
+          "description": "RANGE",
           "format": "double"
         },
         "VAPP": {
           "type": "number",
+          "description": "VAPP",
           "format": "double"
         },
         "FAROFF": {
           "type": "number",
+          "description": "FAROFF",
           "format": "double"
         },
         "FARLDG": {
           "type": "number",
+          "description": "FARLDG",
           "format": "double"
         },
         "AMFOR": {
           "type": "number",
+          "description": "AMFOR",
           "format": "double"
         },
         "SSFOR": {
           "type": "number",
+          "description": "SSFOR",
           "format": "double"
         },
         "GW": {
           "type": "number",
+          "description": "GW",
           "format": "double"
         },
         "AR": {
           "type": "number",
+          "description": "AR",
           "format": "double"
         },
         "THRUST": {
           "type": "number",
+          "description": "THRUST",
           "format": "double"
         },
         "SW": {
           "type": "number",
+          "description": "SW",
           "format": "double"
         },
         "TR": {
           "type": "number",
+          "description": "TR",
           "format": "double"
         },
         "SWEEP": {
           "type": "number",
+          "description": "SWEEP",
           "format": "double"
         },
         "TCA": {
           "type": "number",
+          "description": "TCA",
           "format": "double"
         },
         "VCMN": {
           "type": "number",
+          "description": "VCMN",
           "format": "double"
         },
         "CH": {
           "type": "number",
+          "description": "CH",
           "format": "double"
         },
         "W_S": {
           "type": "number",
+          "description": "W/S",
           "format": "double"
         },
         "T_W": {
           "type": "number",
+          "description": "T/W",
           "format": "double"
         },
         "F0": {
           "type": "number",
+          "description": "T/W",
           "format": "double"
         },
         "OBJ": {
           "type": "number",
+          "description": "T/W",
           "format": "double"
         },
         "PEN": {
           "type": "number",
+          "description": "T/W",
           "format": "double"
         },
         "G": {
           "type": "array",
+          "description": "T/W",
           "items": {
             "type": "number",
             "format": "double"
